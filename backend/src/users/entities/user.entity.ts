@@ -28,7 +28,7 @@ export class User extends BaseEntity {
   })
   role: UserRole;
 
-  @Column()
+  @Column({ default: true })
   isActive: boolean;
 
   @ManyToMany(() => Klass, (klass) => klass.members)

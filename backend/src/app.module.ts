@@ -27,22 +27,27 @@ import { Question } from './questions/entities/question.entity';
 import { Subject } from './subjects/entities/subject.entity';
 import { Ticket } from './tickets/entities/ticket.entity';
 import { User } from './users/entities/user.entity';
+import { ConfigModule } from '@nestjs/config';
+import { conf } from './conf';
+import { EntitiesModule } from './entities/entities.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: ['../.env', '.env'],
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
-      // type: "postgres",
-      // host: "localhost",
-      // port: 5432,
-      // username: "test",
-      // password: "test",
-      // database: "test",
-      // synchronize: true,
-      // logging: true,
-      // subscribers: [],
-      // migrations: [],
-      type: 'sqlite',
-      database: 'db.sqlite3',
+      type: 'postgres',
+      host: conf.db.host,
+      port: conf.db.port,
+      username: conf.db.username,
+      password: conf.db.password,
+      database: conf.db.database,
+      synchronize: true,
+      logging: true,
+      subscribers: [],
+      migrations: [],
       entities: [
         Answer,
         Bookmark,
@@ -57,10 +62,9 @@ import { User } from './users/entities/user.entity';
         Ticket,
         User,
       ],
-      synchronize: false,
     }),
-    UsersModule,
     AuthModule,
+    UsersModule,
     SubjectsModule,
     ListsModule,
     QuestionsModule,
@@ -72,6 +76,7 @@ import { User } from './users/entities/user.entity';
     TicketsModule,
     MarksModule,
     BookmarksModule,
+    EntitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,17 +1,36 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  OnApplicationBootstrap,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+import { User, UserRole } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { hashPassword } from 'src/utils/hash.utils';
+import { conf } from 'src/conf';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnApplicationBootstrap {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) {}
+
+  async onApplicationBootstrap() {
+    const admin = await this.usersRepository.findOneBy({
+      role: UserRole.ADMIN,
+    });
+    if (!admin) {
+      const u = new User();
+      u.name = conf.defaultAdmin.name;
+      u.email = conf.defaultAdmin.email;
+      u.password = await hashPassword(conf.defaultAdmin.password);
+      u.role = UserRole.ADMIN;
+      await this.usersRepository.save(u);
+    }
+  }
 
   async create(createUserDto: CreateUserDto): Promise<number> {
     const u = new User();
