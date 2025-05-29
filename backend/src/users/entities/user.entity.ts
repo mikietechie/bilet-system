@@ -1,6 +1,6 @@
 import { Group } from 'src/groups/entities/group.entity';
 import { Klass } from 'src/klasses/entities/klass.entity';
-import { Entity, Column, JoinColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, JoinColumn, ManyToMany, Index } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import { BaseEntity } from 'src/utils/base.utils';
 
@@ -14,7 +14,8 @@ export class User extends BaseEntity {
   @Column({ length: 500 })
   name: string;
 
-  @Column({ length: 500 })
+  @Column({ length: 500, unique: true })
+  @Index()
   @IsEmail()
   email: string;
 

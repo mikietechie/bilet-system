@@ -29,7 +29,7 @@ import { Ticket } from './tickets/entities/ticket.entity';
 import { User } from './users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { conf } from './conf';
-import { EntitiesModule } from './entities/entities.module';
+import { AccountsModule } from './accounts/accounts.module';
 
 @Module({
   imports: [
@@ -76,7 +76,7 @@ import { EntitiesModule } from './entities/entities.module';
     TicketsModule,
     MarksModule,
     BookmarksModule,
-    EntitiesModule,
+    AccountsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
