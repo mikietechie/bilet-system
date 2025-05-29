@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
   OnApplicationBootstrap,
@@ -33,6 +34,10 @@ export class UsersService implements OnApplicationBootstrap {
   }
 
   async create(createUserDto: CreateUserDto): Promise<number> {
+    const existing_user = this.findUserByEmail(createUserDto.email);
+    if (existing_user) {
+      throw new BadRequestException('Email is taken!');
+    }
     const u = new User();
     u.name = createUserDto.name;
     u.email = createUserDto.email;
@@ -44,6 +49,10 @@ export class UsersService implements OnApplicationBootstrap {
 
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
+  }
+
+  async findUserByEmail(email: string): Promise<User | null> {
+    return await this.usersRepository.findOneBy({ email });
   }
 
   async findOne(id: number): Promise<User | null> {

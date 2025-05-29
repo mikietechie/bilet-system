@@ -1,9 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth/jwt-auth.guard';
 
-@Controller('subjects')
+@Controller('api/v1/subjects')
+@UseGuards(JwtAuthGuard)
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 

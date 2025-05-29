@@ -25,7 +25,6 @@ export class UsersController {
 
   // @UseGuards(AuthGuard('local'))
   @Post()
-  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Create User',

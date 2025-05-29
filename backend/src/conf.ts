@@ -6,6 +6,10 @@ export const conf = {
     host: genv(process.env.HOST, 'localhost'),
   },
 
+  urls: {
+    activateRedirect: genv('ACTIVATION_REDIRECT', 'http://localhost:3000'),
+  },
+
   defaultAdmin: {
     email: genv('DEFAULT_ADMIN_EMAIL', 'su@mail.com'),
     name: genv('DEFAULT_ADMIN_NAME', 'Admin'),

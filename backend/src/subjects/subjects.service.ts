@@ -9,38 +9,39 @@ import { Repository } from 'typeorm';
 export class SubjectsService {
   constructor(
     @InjectRepository(Subject)
-    private SubjectsRepository: Repository<Subject>,
+    private subjectsRepository: Repository<Subject>,
   ) {}
 
   async create(createSubjectDto: CreateSubjectDto): Promise<number> {
-    const u = new Subject();
-    u.name = createSubjectDto.name;
-    await this.SubjectsRepository.save(u);
-    return u.id;
+    const obj = new Subject();
+    obj.name = createSubjectDto.name;
+    obj.level = createSubjectDto.level;
+    await this.subjectsRepository.save(obj);
+    return obj.id;
   }
 
   async findAll(): Promise<Subject[]> {
-    return await this.SubjectsRepository.find();
+    return await this.subjectsRepository.find();
   }
 
   async findOne(id: number): Promise<Subject | null> {
-    return await this.SubjectsRepository.findOneBy({ id });
+    return await this.subjectsRepository.findOneBy({ id });
   }
 
   async update(
     id: number,
     updateSubjectDto: UpdateSubjectDto,
   ): Promise<Subject> {
-    const u = await this.SubjectsRepository.findOneBy({ id });
-    if (!u) {
+    const obj = await this.subjectsRepository.findOneBy({ id });
+    if (!obj) {
       throw new NotFoundException();
     }
-    u.name = updateSubjectDto.name;
-    await this.SubjectsRepository.save(u);
-    return u;
+    obj.name = updateSubjectDto.name;
+    await this.subjectsRepository.save(obj);
+    return obj;
   }
 
   async remove(id: number) {
-    await this.SubjectsRepository.delete(id);
+    await this.subjectsRepository.delete(id);
   }
 }
