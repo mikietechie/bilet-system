@@ -30,6 +30,7 @@ import { User } from './users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { conf } from './conf';
 import { AccountsModule } from './accounts/accounts.module';
+import { GroupMember } from './groups/entities/group-member.entity';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { AccountsModule } from './accounts/accounts.module';
         Bookmark,
         Examination,
         Group,
+        GroupMember,
         Klass,
         List,
         Mark,

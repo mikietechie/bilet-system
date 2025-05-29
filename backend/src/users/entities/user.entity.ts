@@ -1,15 +1,22 @@
-import { Group } from 'src/groups/entities/group.entity';
 import { Klass } from 'src/klasses/entities/klass.entity';
-import { Entity, Column, JoinColumn, ManyToMany, Index } from 'typeorm';
+import {
+  Entity,
+  Column,
+  JoinColumn,
+  ManyToMany,
+  Index,
+  OneToMany,
+} from 'typeorm';
 import { IsEmail } from 'class-validator';
 import { BaseEntity } from 'src/utils/base.utils';
+import { GroupMember } from 'src/groups/entities/group-member.entity';
 
 export enum UserRole {
   ADMIN = 'admin',
   ORDINARY = 'ORDINARY',
 }
 
-@Entity()
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
   @Column({ length: 500 })
   name: string;
@@ -36,7 +43,6 @@ export class User extends BaseEntity {
   @JoinColumn()
   klasses: Klass[];
 
-  @ManyToMany(() => Group, (group) => group.members)
-  @JoinColumn()
-  groups: Group[];
+  @OneToMany(() => GroupMember, (groupMember) => groupMember.user)
+  memberships: GroupMember[];
 }
