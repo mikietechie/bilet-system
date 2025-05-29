@@ -4,6 +4,12 @@
 /**/build
 /**/*.sqlite3
 
+/pytest/env
+*.pyc
+**/__pycache__
+**/*.mypy_cache
+**/*.pytest_cache
+
 # Logs
 logs
 *.log

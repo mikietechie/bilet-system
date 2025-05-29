@@ -1,42 +1,34 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Body, Patch, Delete, Request } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
-import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
+import { ResetPasswordDto } from './dto/reset-password-dto';
+import { RecoverPasswordDto } from './dto/recover-password-dto';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
-
-  @Post()
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return this.accountsService.create(createAccountDto);
-  }
-
   @Get()
-  findAll() {
-    return this.accountsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.accountsService.findOne(+id);
+  findOne(@Request() req) {
+    return this.accountsService.findOne(req.user);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
-    return this.accountsService.update(+id, updateAccountDto);
+  update(@Request() req, @Body() updateAccountDto: UpdateAccountDto) {
+    return this.accountsService.update(updateAccountDto, req.user);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.accountsService.remove(+id);
+  @Patch('reset-password')
+  resetPassword(@Request() req, @Body() resetPasswordDto: ResetPasswordDto) {
+    return this.accountsService.resetPassword(resetPasswordDto, req.user);
+  }
+
+  @Patch('recover-password')
+  recoverPassword(@Request() req, @Body() dto: RecoverPasswordDto) {
+    return this.accountsService.recoverPassword(dto);
+  }
+
+  @Delete('delete-account')
+  deleteAccount(@Request() req) {
+    return this.accountsService.deleteAccount(req.user);
   }
 }

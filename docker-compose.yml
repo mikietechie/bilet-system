@@ -1,0 +1,77 @@
+# Date Created	2025
+# Author				Mike Z
+# Email				  mzinyoni7@outlook.com
+# Website				https://svetatech.com
+# Status				Making a million!
+# Description		A Billet System
+
+# docker compose -f "docker-compose.yml" up -d --build
+# docker compose -f "docker-compose.yml" down
+# docker exec -it containerid /bin/bash
+# docker exec -it postgres /bin/bash
+
+# PLEASE SEE WHAT THE .env
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    env_file:
+      - .env
+
+  # mongodb:
+  #   image: mongo:7.0
+  #   restart: always
+  #   expose:
+  #     - 27017
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - mongo-db:/data/db
+  #   container_name: mongodb
+
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      # - cache
+      # - mongodb
+
+  # cron:
+  #   build:
+  #     context: backend
+  #     dockerfile: cron.Dockerfile
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - cache
+  #     - db
+  #     - mongodb
+
+  # cache:
+  #   restart: unless-stopped
+  #   image: redis:7.0.5-alpine
+  #   expose:
+  #     - 6379
+  #   ports:
+  #     - "6379:6379"
+volumes:
+  postgres-db:
+  # mongo-db:

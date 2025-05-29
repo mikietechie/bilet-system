@@ -8,7 +8,6 @@ import {
   Delete,
   HttpStatus,
   UseGuards,
-  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -19,7 +18,8 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth/jwt-auth.guard';
 
 @ApiBearerAuth()
 @ApiTags('users')
-@Controller('users')
+@Controller('api/v1/users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -36,15 +36,11 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
-  // @UseGuards(AdminOnlyGuard)
-  findAll(@Request() req) {
-    console.log(req.user);
+  findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }

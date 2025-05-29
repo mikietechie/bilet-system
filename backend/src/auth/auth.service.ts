@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { RegisterDto } from './dto/register-dto';
 import { cmpPassword } from 'src/utils/hash.utils';
 import { LoginDto } from './dto/login-dto';
+import { sendMail } from 'src/utils/mail.utils';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,13 @@ export class AuthService {
     u.name = registerDto.name;
     u.email = registerDto.email;
     u.password = registerDto.password;
-    return await this.userRepository.save(u);
+    await this.userRepository.save(u);
+    sendMail(
+      u.email,
+      `Welcome ${u.name}`,
+      `Here is you password\t: ${u.password}`,
+    );
+    return u;
   }
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.userRepository.findOneBy({ email });
@@ -36,7 +43,6 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     console.log(await this.userRepository.find());
     const user = await this.userRepository.findOneBy({ email: loginDto.email });
-    console.log({ user, loginDto });
     if (!user) {
       throw new UnauthorizedException();
     }
