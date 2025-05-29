@@ -19,6 +19,19 @@ export class UsersService implements OnApplicationBootstrap {
     private usersRepository: Repository<User>,
   ) {}
 
+  async getUserFk(id: number): Promise<User | null> {
+    try {
+      return await this.usersRepository.findOneByOrFail({ id });
+    } catch (error) {
+      console.error(error);
+      throw new NotFoundException(`User ${id} was not found!`);
+    }
+  }
+
+  async findUserByEmail(email: string): Promise<User | null> {
+    return await this.usersRepository.findOneBy({ email });
+  }
+
   async onApplicationBootstrap() {
     const admin = await this.usersRepository.findOneBy({
       role: UserRole.ADMIN,
@@ -49,10 +62,6 @@ export class UsersService implements OnApplicationBootstrap {
 
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
-  }
-
-  async findUserByEmail(email: string): Promise<User | null> {
-    return await this.usersRepository.findOneBy({ email });
   }
 
   async findOne(id: number): Promise<User | null> {

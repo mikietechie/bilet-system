@@ -45,7 +45,7 @@ import { AccountsModule } from './accounts/accounts.module';
       password: conf.db.password,
       database: conf.db.database,
       synchronize: true,
-      logging: true,
+      logging: false,
       subscribers: [],
       migrations: [],
       entities: [

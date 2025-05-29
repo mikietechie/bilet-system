@@ -26,6 +26,6 @@ export const conf = {
 
   jwt: {
     secret: genv('JWT_SECRET', 'helloworld'),
-    lifespan: genv('JWT_LIFESPAN', '60m'),
+    lifespan: genv('JWT_LIFESPAN', '10080m'),
   },
 };
