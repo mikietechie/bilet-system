@@ -47,6 +47,16 @@ def post(path: str, data: dict, headers: dict):
     ).json()
 
 
+def get(path: str, params: dict, headers: dict):
+    """..."""
+    return requests.get(
+        api_url + path,
+        params=params,
+        headers=headers,
+        timeout=timeout,
+    ).json()
+
+
 def main():
     """..."""
     su_headers = get_headers(get_access_token("su"))
@@ -58,6 +68,17 @@ def main():
         "OOP",
         "Fundamental of Programming",
         "Python",
+    ]
+    klass_names = [
+        "Mathematical Analysis 1 - 2024",
+        "Mathematical Analysis 2 - 2024",
+        "Mathematical Analysis 3 - 2025",
+        "Modern Algebra - 2024",
+        "Linear Algebra - 2024",
+        "Geometry and Topology - 2024",
+        "Introduction to Programming - 2024",
+        "OOP - 2024",
+        "Python - 2024",
     ]
     group_names = [
         "B01/24",
@@ -98,6 +119,17 @@ def main():
 
     for name in group_names:
         post("/groups", {"name": name}, oivanova_headers)
+
+    for name in klass_names:
+        post("/klasses", {"name": name}, oivanova_headers)
+
+    for klass_id in range(1, 10):
+        for user_id in range(7, 14):
+            post(
+                f"/klasses/{klass_id}/members",
+                {"userId": user_id, "isAdmin": False},
+                oivanova_headers,
+            )
 
 
 if __name__ == "__main__":

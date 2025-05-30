@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { GroupsService } from './groups.service';
 import { CreateGroupDto } from './dto/create-group.dto';
@@ -35,49 +36,49 @@ export class GroupsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.groupsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.groupsService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateGroupDto: UpdateGroupDto,
     @Request() req,
   ) {
-    return this.groupsService.update(+id, updateGroupDto, req.user);
+    return this.groupsService.update(id, updateGroupDto, req.user);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string, @Request() req) {
-    return this.groupsService.remove(+id, req.user);
+  remove(@Param('id', ParseIntPipe) id: number, @Request() req) {
+    return this.groupsService.remove(id, req.user);
   }
 
   @Get(':gid/members')
-  readMembers(@Param('gid') id: string) {
-    return this.groupsService.findAllMembers(+id);
+  readMembers(@Param('gid', ParseIntPipe) id: number) {
+    return this.groupsService.findAllMembers(id);
   }
 
   @Post(':gid/members')
   addMember(
     @Body() addGroupMemberDto: AddGroupMemberDto,
-    @Param('gid') id: string,
+    @Param('gid', ParseIntPipe) id: number,
     @Request() req,
   ) {
-    return this.groupsService.addMember(+id, addGroupMemberDto, req.user);
+    return this.groupsService.addMember(id, addGroupMemberDto, req.user);
   }
 
   @Patch(':gid/members/:mid')
   updateMember(
     @Body() updateGroupMemberDto: UpdateGroupMemberDto,
-    @Param('mid') id: string,
+    @Param('mid', ParseIntPipe) id: number,
     @Request() req,
   ) {
-    return this.groupsService.updateMember(+id, updateGroupMemberDto, req.user);
+    return this.groupsService.updateMember(id, updateGroupMemberDto, req.user);
   }
 
   @Delete(':gid/members/:mid')
-  removeMember(@Param('mid') id: string, @Request() req) {
-    return this.groupsService.removeMember(+id, req.user);
+  removeMember(@Param('mid', ParseIntPipe) id: number, @Request() req) {
+    return this.groupsService.removeMember(id, req.user);
   }
 }
