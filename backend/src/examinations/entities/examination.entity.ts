@@ -1,5 +1,6 @@
 import { List } from 'src/lists/entities/list.entity';
 import { Mark } from 'src/marks/entities/mark.entity';
+import { User } from 'src/users/entities/user.entity';
 import { BaseEntity } from 'src/utils/base.utils';
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
@@ -15,4 +16,8 @@ export class Examination extends BaseEntity {
   @OneToMany(() => Mark, (mark) => mark.examination)
   @JoinColumn()
   marks: Mark[];
+
+  @ManyToOne(() => User, (owner) => owner.id)
+  @JoinColumn()
+  owner: User;
 }

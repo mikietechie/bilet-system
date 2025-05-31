@@ -57,6 +57,15 @@ def get(path: str, params: dict, headers: dict):
     ).json()
 
 
+def register(name: str):
+    """..."""
+    return post(
+        "/auth/register",
+        {"name": name, "email": get_email(name), "password": "password"},
+        {},
+    )
+
+
 def main():
     """..."""
     su_headers = get_headers(get_access_token("su"))
@@ -90,10 +99,13 @@ def main():
         "B10/24",
     ]
     teacher_names = [
-        "oivanova" "atiskin",
+        "oivanova",
+        "atiskin",
         "ybelov",
         "ilukashova",
         "apetrov",
+        "asemenov",
+        "amiller",
     ]
     student_names = [
         "mzinyoni",
@@ -109,11 +121,7 @@ def main():
         post("/subjects", {"name": name}, su_headers)
 
     for name in teacher_names + student_names:
-        post(
-            "/auth/register",
-            {"name": name, "email": get_email(name), "password": "password"},
-            {},
-        )
+        register(name)
 
     oivanova_headers = get_headers(get_access_token("oivanova"))
 
@@ -130,6 +138,52 @@ def main():
                 {"userId": user_id, "isAdmin": False},
                 oivanova_headers,
             )
+
+    post(
+        "/lists",
+        {"name": "Mathematical Analysis 1 - 2024"},
+        get_headers(get_access_token("ybelov")),
+    )
+    post(
+        "/lists",
+        {"name": "Mathematical Analysis 2 - 2024"},
+        get_headers(get_access_token("ybelov")),
+    )
+    post(
+        "/lists",
+        {"name": "Mathematical Analysis 3 - 2024"},
+        get_headers(get_access_token("ybelov")),
+    )
+    post(
+        "/lists",
+        {"name": "Modern Algebra - 2024"},
+        get_headers(get_access_token("asemenov")),
+    )
+    post(
+        "/lists",
+        {"name": "Linear Algebra - 2024"},
+        get_headers(get_access_token("asemenov")),
+    )
+    post(
+        "/lists",
+        {"name": "Geometry and Topology - 2024"},
+        get_headers(get_access_token("amiller")),
+    )
+    post(
+        "/lists",
+        {"name": "Introduction to Programming - 2024"},
+        get_headers(get_access_token("apetrov")),
+    )
+    post(
+        "/lists",
+        {"name": "OOP - 2024"},
+        get_headers(get_access_token("apetrov")),
+    )
+    post(
+        "/lists",
+        {"name": "Python - 2024"},
+        get_headers(get_access_token("apetrov")),
+    )
 
 
 if __name__ == "__main__":

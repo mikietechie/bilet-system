@@ -13,11 +13,11 @@ export class SubjectsService {
   ) {}
 
   async create(createSubjectDto: CreateSubjectDto): Promise<number> {
-    const obj = new Subject();
-    obj.name = createSubjectDto.name;
-    obj.level = createSubjectDto.level;
-    await this.subjectsRepository.save(obj);
-    return obj.id;
+    const subject = new Subject();
+    subject.name = createSubjectDto.name;
+    subject.level = createSubjectDto.level;
+    await this.subjectsRepository.save(subject);
+    return subject.id;
   }
 
   async findAll(): Promise<Subject[]> {
@@ -25,23 +25,30 @@ export class SubjectsService {
   }
 
   async findOne(id: number): Promise<Subject | null> {
-    return await this.subjectsRepository.findOneBy({ id });
+    return await this.getSubjectFk(id);
   }
 
   async update(
     id: number,
     updateSubjectDto: UpdateSubjectDto,
   ): Promise<Subject> {
-    const obj = await this.subjectsRepository.findOneBy({ id });
-    if (!obj) {
-      throw new NotFoundException();
-    }
-    obj.name = updateSubjectDto.name;
-    await this.subjectsRepository.save(obj);
-    return obj;
+    const subject = await this.getSubjectFk(id);
+    subject.name = updateSubjectDto.name;
+    await this.subjectsRepository.save(subject);
+    return subject;
   }
 
   async remove(id: number) {
-    await this.subjectsRepository.delete(id);
+    const subject = await this.getSubjectFk(id);
+    await this.subjectsRepository.remove(subject);
+  }
+
+  async getSubjectFk(id: number): Promise<Subject> {
+    try {
+      return await this.subjectsRepository.findOneByOrFail({ id });
+    } catch (error) {
+      console.error(error);
+      throw new NotFoundException();
+    }
   }
 }
