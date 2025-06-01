@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBookmarkDto } from './dto/create-bookmark.dto';
-import { UpdateBookmarkDto } from './dto/update-bookmark.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Bookmark } from './entities/bookmark.entity';
+import { Repository } from 'typeorm';
+import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 
 @Injectable()
 export class BookmarksService {
-  create(createBookmarkDto: CreateBookmarkDto) {
-    return 'This action adds a new bookmark';
+  constructor(
+    @InjectRepository(Bookmark)
+    private bookmarksRepository: Repository<Bookmark>,
+  ) {}
+
+  async create(
+    createBookmarkDto: CreateBookmarkDto,
+    token: JwtPayloadDto,
+  ): Promise<number> {
+    const bookmark = new Bookmark();
+    bookmark.iid = createBookmarkDto.iid;
+    bookmark.entity = createBookmarkDto.entity;
+    bookmark.name = createBookmarkDto.name;
+    bookmark.owner = { id: token.userId } as any;
+    await this.bookmarksRepository.save(bookmark);
+    return bookmark.id;
   }
 
-  findAll() {
-    return `This action returns all bookmarks`;
+  async findAll(token: JwtPayloadDto): Promise<Bookmark[]> {
+    return await this.bookmarksRepository.find({
+      where: { owner: { id: token.userId } as any },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} bookmark`;
+  async findOne(id: number, token: JwtPayloadDto): Promise<Bookmark> {
+    const bookmark = await this.findBookmark(id, token.userId);
+    return bookmark;
   }
 
-  update(id: number, updateBookmarkDto: UpdateBookmarkDto) {
-    return `This action updates a #${id} bookmark`;
+  // update(id: number, updateBookmarkDto: UpdateBookmarkDto) {
+  //   return `This action updates a #${id} bookmark`;
+  // }
+
+  async remove(id: number, token: JwtPayloadDto) {
+    const bookmark = await this.findBookmark(id, token.userId);
+    await this.bookmarksRepository.remove(bookmark);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} bookmark`;
+  async findBookmark(id: number, userId: number): Promise<Bookmark> {
+    const bookmark = await this.bookmarksRepository.findOne({
+      where: { id, owner: { id: userId } as any },
+    });
+    if (!bookmark) {
+      throw new NotFoundException();
+    }
+    return bookmark;
   }
 }

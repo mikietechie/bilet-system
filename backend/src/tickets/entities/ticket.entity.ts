@@ -13,7 +13,7 @@ import { BaseEntity } from 'src/utils/base.utils';
 
 @Entity()
 export class Ticket extends BaseEntity {
-  @Column({ length: 500, unique: true })
+  @Column({ length: 512 })
   name: string;
 
   @ManyToOne(() => List, (list) => list.id)
@@ -22,7 +22,7 @@ export class Ticket extends BaseEntity {
 
   @ManyToMany(() => Question, (question) => question.id)
   @JoinColumn()
-  quesstions: Question[];
+  questions: Question[];
 
   @OneToMany(() => Mark, (mark) => mark.ticket)
   @JoinColumn()

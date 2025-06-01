@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+  Request,
+} from '@nestjs/common';
 import { MarksService } from './marks.service';
 import { CreateMarkDto } from './dto/create-mark.dto';
 import { UpdateMarkDto } from './dto/update-mark.dto';
@@ -8,8 +18,8 @@ export class MarksController {
   constructor(private readonly marksService: MarksService) {}
 
   @Post()
-  create(@Body() createMarkDto: CreateMarkDto) {
-    return this.marksService.create(createMarkDto);
+  create(@Body() createMarkDto: CreateMarkDto, @Request() req) {
+    return this.marksService.create(createMarkDto, req.user);
   }
 
   @Get()
@@ -17,18 +27,27 @@ export class MarksController {
     return this.marksService.findAll();
   }
 
+  @Get('my-marks')
+  findAllMarksByUser(@Request() req) {
+    return this.marksService.findAllMarksByUser(req.user.id);
+  }
+
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.marksService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number, @Request() req) {
+    return this.marksService.findOne(id, req.user);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMarkDto: UpdateMarkDto) {
-    return this.marksService.update(+id, updateMarkDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateMarkDto: UpdateMarkDto,
+    @Request() req,
+  ) {
+    return this.marksService.update(id, updateMarkDto, req.user);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.marksService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number, @Request() req) {
+    return this.marksService.remove(id, req.user);
   }
 }

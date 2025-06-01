@@ -29,7 +29,9 @@ import { Ticket } from './tickets/entities/ticket.entity';
 import { User } from './users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { conf } from './conf';
-import { EntitiesModule } from './entities/entities.module';
+import { AccountsModule } from './accounts/accounts.module';
+import { GroupMember } from './groups/entities/group-member.entity';
+import { KlassMember } from './klasses/entities/klass-member.entity';
 
 @Module({
   imports: [
@@ -45,7 +47,7 @@ import { EntitiesModule } from './entities/entities.module';
       password: conf.db.password,
       database: conf.db.database,
       synchronize: true,
-      logging: true,
+      logging: false,
       subscribers: [],
       migrations: [],
       entities: [
@@ -53,7 +55,9 @@ import { EntitiesModule } from './entities/entities.module';
         Bookmark,
         Examination,
         Group,
+        GroupMember,
         Klass,
+        KlassMember,
         List,
         Mark,
         Note,
@@ -76,7 +80,7 @@ import { EntitiesModule } from './entities/entities.module';
     TicketsModule,
     MarksModule,
     BookmarksModule,
-    EntitiesModule,
+    AccountsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,20 +1,22 @@
-import { Group } from 'src/groups/entities/group.entity';
-import { Klass } from 'src/klasses/entities/klass.entity';
-import { Entity, Column, JoinColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, Index, OneToMany, JoinColumn } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import { BaseEntity } from 'src/utils/base.utils';
+import { GroupMember } from 'src/groups/entities/group-member.entity';
+import { KlassMember } from 'src/klasses/entities/klass-member.entity';
+import { Mark } from 'src/marks/entities/mark.entity';
 
 export enum UserRole {
   ADMIN = 'admin',
   ORDINARY = 'ORDINARY',
 }
 
-@Entity()
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
   @Column({ length: 500 })
   name: string;
 
-  @Column({ length: 500 })
+  @Column({ length: 500, unique: true })
+  @Index()
   @IsEmail()
   email: string;
 
@@ -31,11 +33,13 @@ export class User extends BaseEntity {
   @Column({ default: true })
   isActive: boolean;
 
-  @ManyToMany(() => Klass, (klass) => klass.members)
+  @OneToMany(() => Mark, (mark) => mark.user)
   @JoinColumn()
-  klasses: Klass[];
+  marks: Mark[];
 
-  @ManyToMany(() => Group, (group) => group.members)
-  @JoinColumn()
-  groups: Group[];
+  @OneToMany(() => KlassMember, (klassMember) => klassMember.user)
+  klassMemberships: KlassMember[];
+
+  @OneToMany(() => GroupMember, (groupMember) => groupMember.user)
+  groupMemberships: GroupMember[];
 }
