@@ -52,6 +52,11 @@ export class ListsController {
     return this.listsService.remove(id, req.user);
   }
 
+  @Get('owned')
+  findAllListsByOwner(@Request() req) {
+    return this.listsService.findAllListsByOwner(req.user?.id);
+  }
+
   // Questions
   @Get(':id/questions')
   findAllQuestions(@Param('id', ParseIntPipe) id: number) {

@@ -54,6 +54,16 @@ export class KlassesController {
     return this.klassesService.remove(id, req.user);
   }
 
+  @Get('owned')
+  findAllKlassesByOwner(@Request() req) {
+    return this.klassesService.findAllKlassesByOwner(req.user?.id);
+  }
+
+  @Get('member')
+  findAllKlassesByMembership(@Request() req) {
+    return this.klassesService.findAllKlassesByOwner(req.user?.id);
+  }
+
   @Get(':kid/members')
   readMembers(@Param('kid', ParseIntPipe) id: number) {
     return this.klassesService.findAllMembers(id);

@@ -14,6 +14,7 @@ import { UserRole } from 'src/users/entities/user.entity';
 import { AddGroupMemberDto } from './dto/add-group-member.dto';
 import { GroupMember } from './entities/group-member.entity';
 import { UpdateGroupMemberDto } from './dto/update-group-member.dto';
+import { idAsIBaseAny } from 'src/utils/base.utils';
 
 @Injectable()
 export class GroupsService {
@@ -39,6 +40,19 @@ export class GroupsService {
 
   async findAll(): Promise<Group[]> {
     return this.groupsRepository.find();
+  }
+
+  async findAllGroupsByOwner(userId: number): Promise<Group[]> {
+    return await this.groupsRepository.findBy({ owner: idAsIBaseAny(userId) });
+  }
+
+  async findAllGroupsByMembership(userId: number): Promise<Group[]> {
+    return await this.groupsRepository.findBy({
+      id: Raw(
+        () =>
+          `"id" in (SELECT groupId FROM group_member WHERE userID = ${Number(userId)};)`,
+      ),
+    });
   }
 
   async findOne(id: number): Promise<Group> {

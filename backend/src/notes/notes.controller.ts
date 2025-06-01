@@ -51,4 +51,9 @@ export class NotesController {
   remove(@Param('id', ParseIntPipe) id: number, @Request() req) {
     return this.notesService.remove(id, req.user);
   }
+
+  @Get('mine')
+  findAllByOwner(@Request() req) {
+    return this.notesService.findAllByOwner(req.user.id);
+  }
 }

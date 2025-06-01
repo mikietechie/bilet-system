@@ -38,11 +38,6 @@ export class ExaminationsController {
     return this.examinationsService.findOne(id);
   }
 
-  @Get(':id/marks')
-  findAllMarks(@Param('id', ParseIntPipe) id: number) {
-    return this.examinationsService.findAllMarks(id);
-  }
-
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -55,5 +50,15 @@ export class ExaminationsController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number, @Request() req) {
     return this.examinationsService.remove(id, req.user);
+  }
+
+  @Get(':id/marks')
+  findAllMarks(@Param('id', ParseIntPipe) id: number) {
+    return this.examinationsService.findAllMarks(id);
+  }
+
+  @Get('owned')
+  findAllExaminationsByOwner(@Request() req) {
+    return this.examinationsService.findAllExaminationsByOwner(req.user?.id);
   }
 }

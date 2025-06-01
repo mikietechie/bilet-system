@@ -4,12 +4,16 @@ import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { Subject } from './entities/subject.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Note } from 'src/notes/entities/note.entity';
+import { idAsIBaseAny } from 'src/utils/base.utils';
 
 @Injectable()
 export class SubjectsService {
   constructor(
     @InjectRepository(Subject)
     private subjectsRepository: Repository<Subject>,
+    @InjectRepository(Note)
+    private notesRepository: Repository<Note>,
   ) {}
 
   async create(createSubjectDto: CreateSubjectDto): Promise<number> {
@@ -22,6 +26,12 @@ export class SubjectsService {
 
   async findAll(): Promise<Subject[]> {
     return await this.subjectsRepository.find();
+  }
+
+  async findNotes(id: number): Promise<Note[]> {
+    return await this.notesRepository.find({
+      where: { subject: idAsIBaseAny(id), isPublic: true },
+    });
   }
 
   async findOne(id: number): Promise<Subject | null> {

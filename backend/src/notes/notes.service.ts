@@ -8,6 +8,7 @@ import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 import { UsersService } from 'src/users/users.service';
 import { SubjectsService } from 'src/subjects/subjects.service';
 import { checkOwnerShipPermissions } from 'src/utils/permissions.utils';
+import { idAsIBaseAny } from 'src/utils/base.utils';
 
 @Injectable()
 export class NotesService {
@@ -36,6 +37,15 @@ export class NotesService {
 
   async findAll(): Promise<Note[]> {
     return await this.notesRepository.find();
+  }
+
+  async findAllByOwner(ownerId: number): Promise<Note[]> {
+    return await this.notesRepository.find({
+      where: { owner: idAsIBaseAny(ownerId) },
+      relations: {
+        subject: true,
+      },
+    });
   }
 
   async findOne(id: number): Promise<Note> {

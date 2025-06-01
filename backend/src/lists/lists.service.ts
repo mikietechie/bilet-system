@@ -12,6 +12,7 @@ import { UsersService } from 'src/users/users.service';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 import { UserRole } from 'src/users/entities/user.entity';
 import { Question } from 'src/questions/entities/question.entity';
+import { idAsIBaseAny } from 'src/utils/base.utils';
 
 @Injectable()
 export class ListsService {
@@ -36,6 +37,10 @@ export class ListsService {
 
   async findAll(): Promise<List[]> {
     return await this.listsRepository.find();
+  }
+
+  async findAllListsByOwner(userId: number): Promise<List[]> {
+    return await this.listsRepository.findBy({ owner: idAsIBaseAny(userId) });
   }
 
   async findOne(id: number): Promise<List> {

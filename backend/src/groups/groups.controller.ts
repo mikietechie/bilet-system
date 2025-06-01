@@ -54,6 +54,16 @@ export class GroupsController {
     return this.groupsService.remove(id, req.user);
   }
 
+  @Get('owned')
+  findAllGroupsByOwner(@Request() req) {
+    return this.groupsService.findAllGroupsByOwner(req.user?.id);
+  }
+
+  @Get('member')
+  findAllGroupsByMembership(@Request() req) {
+    return this.groupsService.findAllGroupsByOwner(req.user?.id);
+  }
+
   @Get(':gid/members')
   readMembers(@Param('gid', ParseIntPipe) id: number) {
     return this.groupsService.findAllMembers(id);

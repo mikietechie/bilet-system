@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 import { checkOwnerShipPermissions } from 'src/utils/permissions.utils';
 import { Mark } from 'src/marks/entities/mark.entity';
+import { idAsIBaseAny } from 'src/utils/base.utils';
 
 @Injectable()
 export class ExaminationsService {
@@ -32,6 +33,12 @@ export class ExaminationsService {
 
   async findAll(): Promise<Examination[]> {
     return await this.examinationsRepository.find();
+  }
+
+  async findAllExaminationsByOwner(userId: number): Promise<Examination[]> {
+    return await this.examinationsRepository.findBy({
+      owner: idAsIBaseAny(userId),
+    });
   }
 
   async findOne(id: number): Promise<Examination> {

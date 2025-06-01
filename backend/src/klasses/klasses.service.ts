@@ -14,6 +14,7 @@ import { UserRole } from 'src/users/entities/user.entity';
 import { AddKlassMemberDto } from './dto/add-klass-member.dto';
 import { KlassMember } from './entities/klass-member.entity';
 import { UpdateKlassMemberDto } from './dto/update-klass-member.dto';
+import { idAsIBaseAny } from 'src/utils/base.utils';
 
 @Injectable()
 export class KlassesService {
@@ -39,6 +40,19 @@ export class KlassesService {
 
   async findAll(): Promise<Klass[]> {
     return this.klassesRepository.find();
+  }
+
+  async findAllKlassesByOwner(userId: number): Promise<Klass[]> {
+    return await this.klassesRepository.findBy({ owner: idAsIBaseAny(userId) });
+  }
+
+  async findAllKlassesByMembership(userId: number): Promise<Klass[]> {
+    return await this.klassesRepository.findBy({
+      id: Raw(
+        () =>
+          `"id" in (SELECT klassId FROM klass_member WHERE userID = ${Number(userId)};)`,
+      ),
+    });
   }
 
   async findOne(id: number): Promise<Klass> {

@@ -35,9 +35,12 @@ export class MarksService {
     return `This action returns all marks`;
   }
 
-  async findAllUserMarks(token: JwtPayloadDto): Promise<Mark[]> {
+  async findAllMarksByUser(userId: number): Promise<Mark[]> {
     return await this.marksRepository.find({
-      where: { user: { id: token.userId } as any },
+      where: { user: { id: userId } as any },
+      relations: {
+        examination: true,
+      },
     });
   }
 

@@ -27,6 +27,11 @@ export class MarksController {
     return this.marksService.findAll();
   }
 
+  @Get('my-marks')
+  findAllMarksByUser(@Request() req) {
+    return this.marksService.findAllMarksByUser(req.user.id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number, @Request() req) {
     return this.marksService.findOne(id, req.user);
