@@ -6,18 +6,21 @@ import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Examination extends BaseEntity {
-  @Column({ length: 500, unique: true })
-  name: string;
+  @Column({ length: 512 })
+  title: string;
+
+  @Column({ type: 'date' })
+  date: Date;
 
   @ManyToOne(() => List, (list) => list.id)
   @JoinColumn()
   list: List;
 
-  @OneToMany(() => Mark, (mark) => mark.examination)
-  @JoinColumn()
-  marks: Mark[];
-
   @ManyToOne(() => User, (owner) => owner.id)
   @JoinColumn()
   owner: User;
+
+  @OneToMany(() => Mark, (mark) => mark.examination)
+  @JoinColumn()
+  marks: Mark[];
 }

@@ -8,6 +8,9 @@ export class Bookmark extends BaseEntity {
   @Column({})
   iid: number;
 
+  @Column({ length: 128, nullable: true })
+  name: string;
+
   @Column({ length: 128 })
   entity: string;
 

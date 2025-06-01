@@ -29,3 +29,7 @@ export abstract class BaseDto {
   deletedAt: Date;
   _version: number;
 }
+
+export interface IBase {
+  id: number;
+}
