@@ -81,14 +81,19 @@ export class GroupsController {
   @Patch(':gid/members/:mid')
   updateMember(
     @Body() updateGroupMemberDto: UpdateGroupMemberDto,
-    @Param('mid', ParseIntPipe) id: number,
+    @Param('gid', ParseIntPipe) gid: number,
+    @Param('mid', ParseIntPipe) mid: number,
     @Request() req,
   ) {
-    return this.groupsService.updateMember(id, updateGroupMemberDto, req.user);
+    return this.groupsService.updateMember(mid, updateGroupMemberDto, req.user);
   }
 
   @Delete(':gid/members/:mid')
-  removeMember(@Param('mid', ParseIntPipe) id: number, @Request() req) {
-    return this.groupsService.removeMember(id, req.user);
+  removeMember(
+    @Param('mid', ParseIntPipe) mid: number,
+    @Param('gid', ParseIntPipe) gid: number,
+    @Request() req,
+  ) {
+    return this.groupsService.removeMember(mid, req.user);
   }
 }

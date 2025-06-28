@@ -1,0 +1,26 @@
+# Bookmark
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**iid** | **number** |  | [default to undefined]
+**name** | **string** |  | [default to undefined]
+**entity** | **string** |  | [default to undefined]
+**owner** | [**User**](User.md) |  | [default to undefined]
+
+## Example
+
+```typescript
+import { Bookmark } from './api';
+
+const instance: Bookmark = {
+    iid,
+    name,
+    entity,
+    owner,
+};
+```
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

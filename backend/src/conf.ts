@@ -1,4 +1,4 @@
-import { genv } from './utils/env';
+import { genv } from './common/env';
 
 export const conf = {
   server: {

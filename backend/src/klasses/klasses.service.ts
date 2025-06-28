@@ -14,7 +14,7 @@ import { UserRole } from 'src/users/entities/user.entity';
 import { AddKlassMemberDto } from './dto/add-klass-member.dto';
 import { KlassMember } from './entities/klass-member.entity';
 import { UpdateKlassMemberDto } from './dto/update-klass-member.dto';
-import { idAsIBaseAny } from 'src/utils/base.utils';
+import { idAsIBaseAny } from 'src/common/base/utils';
 
 @Injectable()
 export class KlassesService {

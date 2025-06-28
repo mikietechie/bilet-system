@@ -1,6 +1,6 @@
 import { Subject } from 'src/subjects/entities/subject.entity';
 import { User } from 'src/users/entities/user.entity';
-import { BaseEntity } from 'src/utils/base.utils';
+import { BaseEntity } from 'src/common/base/entiry';
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()

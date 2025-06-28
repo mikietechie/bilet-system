@@ -14,7 +14,7 @@ import { UserRole } from 'src/users/entities/user.entity';
 import { AddGroupMemberDto } from './dto/add-group-member.dto';
 import { GroupMember } from './entities/group-member.entity';
 import { UpdateGroupMemberDto } from './dto/update-group-member.dto';
-import { idAsIBaseAny } from 'src/utils/base.utils';
+import { idAsIBaseAny } from 'src/common/base/utils';
 
 @Injectable()
 export class GroupsService {

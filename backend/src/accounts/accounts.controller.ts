@@ -12,7 +12,7 @@ export class AccountsController {
     return this.accountsService.findOne(req.user);
   }
 
-  @Patch(':id')
+  @Patch('')
   update(@Request() req, @Body() updateAccountDto: UpdateAccountDto) {
     return this.accountsService.update(updateAccountDto, req.user);
   }

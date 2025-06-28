@@ -5,7 +5,7 @@ import { Subject } from './entities/subject.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Note } from 'src/notes/entities/note.entity';
-import { idAsIBaseAny } from 'src/utils/base.utils';
+import { idAsIBaseAny } from 'src/common/base/utils';
 
 @Injectable()
 export class SubjectsService {

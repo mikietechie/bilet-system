@@ -1,5 +1,5 @@
 import { User } from 'src/users/entities/user.entity';
-import { BaseEntity } from 'src/utils/base.utils';
+import { BaseEntity } from 'src/common/base/entiry';
 import { Entity, Column, ManyToOne, JoinColumn, Unique } from 'typeorm';
 import { Group } from './group.entity';
 

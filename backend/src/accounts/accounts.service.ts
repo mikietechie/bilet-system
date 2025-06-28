@@ -9,8 +9,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
-import { cmpPassword, hashPassword } from 'src/utils/hash.utils';
-import { sendMail } from 'src/utils/mail.utils';
+import { cmpPassword, hashPassword } from 'src/common/hash.utils';
+import { sendMail } from 'src/common/mail.utils';
 import { RecoverPasswordDto } from './dto/recover-password-dto';
 
 @Injectable()

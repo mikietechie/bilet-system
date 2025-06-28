@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Question } from 'src/questions/entities/question.entity';
 import { Mark } from 'src/marks/entities/mark.entity';
-import { BaseEntity } from 'src/utils/base.utils';
+import { BaseEntity } from 'src/common/base/entiry';
 
 @Entity()
 export class Ticket extends BaseEntity {

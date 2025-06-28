@@ -1,7 +1,7 @@
 import { List } from 'src/lists/entities/list.entity';
 import { Answer } from 'src/answers/entities/answer.entity';
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
-import { BaseEntity } from 'src/utils/base.utils';
+import { BaseEntity } from 'src/common/base/entiry';
 
 @Entity()
 export class Question extends BaseEntity {

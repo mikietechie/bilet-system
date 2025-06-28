@@ -1,0 +1,26 @@
+# Ticket
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**name** | **string** |  | [default to undefined]
+**list** | [**List**](List.md) |  | [default to undefined]
+**questions** | [**Array&lt;Question&gt;**](Question.md) |  | [default to undefined]
+**marks** | [**Array&lt;Mark&gt;**](Mark.md) |  | [default to undefined]
+
+## Example
+
+```typescript
+import { Ticket } from './api';
+
+const instance: Ticket = {
+    name,
+    list,
+    questions,
+    marks,
+};
+```
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

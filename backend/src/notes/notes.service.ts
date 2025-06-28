@@ -7,8 +7,8 @@ import { Repository } from 'typeorm';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 import { UsersService } from 'src/users/users.service';
 import { SubjectsService } from 'src/subjects/subjects.service';
-import { checkOwnerShipPermissions } from 'src/utils/permissions.utils';
-import { idAsIBaseAny } from 'src/utils/base.utils';
+import { checkOwnerShipPermissions } from 'src/common/permissions.utils';
+import { idAsIBaseAny } from 'src/common/base/utils';
 
 @Injectable()
 export class NotesService {

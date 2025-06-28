@@ -1,9 +1,9 @@
 import { Entity, Column, Index, OneToMany, JoinColumn } from 'typeorm';
 import { IsEmail } from 'class-validator';
-import { BaseEntity } from 'src/utils/base.utils';
 import { GroupMember } from 'src/groups/entities/group-member.entity';
 import { KlassMember } from 'src/klasses/entities/klass-member.entity';
 import { Mark } from 'src/marks/entities/mark.entity';
+import { BaseEntity } from 'src/common/base/entiry';
 
 export enum UserRole {
   ADMIN = 'admin',

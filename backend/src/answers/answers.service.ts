@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 import { UsersService } from 'src/users/users.service';
 import { QuestionsService } from 'src/questions/questions.service';
-import { checkOwnerShipPermissions } from 'src/utils/permissions.utils';
+import { checkOwnerShipPermissions } from 'src/common/permissions.utils';
 
 @Injectable()
 export class AnswersService {

@@ -12,7 +12,7 @@ import { UsersService } from 'src/users/users.service';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 import { UserRole } from 'src/users/entities/user.entity';
 import { Question } from 'src/questions/entities/question.entity';
-import { idAsIBaseAny } from 'src/utils/base.utils';
+import { idAsIBaseAny } from 'src/common/base/utils';
 
 @Injectable()
 export class ListsService {

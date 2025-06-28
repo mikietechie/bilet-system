@@ -1,7 +1,7 @@
 import { List } from 'src/lists/entities/list.entity';
 import { Mark } from 'src/marks/entities/mark.entity';
 import { User } from 'src/users/entities/user.entity';
-import { BaseEntity } from 'src/utils/base.utils';
+import { BaseEntity } from 'src/common/base/entiry';
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity()

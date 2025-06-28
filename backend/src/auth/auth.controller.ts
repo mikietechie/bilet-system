@@ -1,9 +1,22 @@
-import { Body, Controller, Get, Param, Post, Redirect } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Redirect,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register-dto';
 import { LoginDto } from './dto/login-dto';
 import { conf } from 'src/conf';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 
+@ApiTags('auth')
 @Controller('api/v1/auth/')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -18,14 +31,23 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  @ApiResponse({ status: HttpStatus.TEMPORARY_REDIRECT })
   @Get('activate/:email/:key')
-  async activate(@Param('email') email: string, @Param('key') key: string) {
+  @HttpCode(307)
+  async activate(
+    @Res() res: Response,
+    @Param('email') email: string,
+    @Param('key') key: string,
+  ) {
     try {
       this.authService.activate({ email, key });
-      return Redirect(conf.urls.activateRedirect);
+      return Redirect(
+        conf.urls.activateRedirect,
+        HttpStatus.TEMPORARY_REDIRECT,
+      );
     } catch (error) {
       console.error(error);
-      return 'Error';
+      return res.status(400).send('Error');
     }
   }
 }

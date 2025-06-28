@@ -1,6 +1,6 @@
 import { List } from 'src/lists/entities/list.entity';
 import { Note } from 'src/notes/entities/note.entity';
-import { BaseEntity } from 'src/utils/base.utils';
+import { BaseEntity } from 'src/common/base/entiry';
 import { Entity, Column, OneToMany, JoinColumn } from 'typeorm';
 
 export enum SubjectLevel {

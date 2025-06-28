@@ -8,9 +8,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { RegisterDto } from './dto/register-dto';
-import { cmpPassword, hashPassword } from 'src/utils/hash.utils';
-import { LoginDto } from './dto/login-dto';
-import { sendMail } from 'src/utils/mail.utils';
+import { cmpPassword, hashPassword } from 'src/common/hash.utils';
+import { LoginDto, LoginResponseDto } from './dto/login-dto';
+import { sendMail } from 'src/common/mail.utils';
 import { ActivateDto } from './dto/activate-dto';
 import { getActivationLink } from 'src/users/users.utils';
 
@@ -53,7 +53,7 @@ export class AuthService {
     }
     return null;
   }
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto): Promise<LoginResponseDto> {
     const user = await this.userRepository.findOneBy({ email: loginDto.email });
     if (!user) {
       throw new UnauthorizedException();
@@ -67,7 +67,8 @@ export class AuthService {
       role: user.role,
     };
     return {
-      access_token: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload),
+      refreshToken: '',
     };
   }
 

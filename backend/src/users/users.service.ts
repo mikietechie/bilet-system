@@ -9,7 +9,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserRole } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { hashPassword } from 'src/utils/hash.utils';
+import { hashPassword } from 'src/common/hash.utils';
 import { conf } from 'src/conf';
 
 @Injectable()

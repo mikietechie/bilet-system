@@ -6,7 +6,7 @@ import { Mark } from './entities/mark.entity';
 import { Repository } from 'typeorm';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
 import { ExaminationsService } from 'src/examinations/examinations.service';
-import { checkOwnerShipPermissions } from 'src/utils/permissions.utils';
+import { checkOwnerShipPermissions } from 'src/common/permissions.utils';
 
 @Injectable()
 export class MarksService {

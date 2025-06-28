@@ -81,14 +81,23 @@ export class KlassesController {
   @Patch(':kid/members/:mid')
   updateMember(
     @Body() updateKlassMemberDto: UpdateKlassMemberDto,
-    @Param('mid', ParseIntPipe, ParseIntPipe) id: number,
+    @Param('kid', ParseIntPipe, ParseIntPipe) kid: number,
+    @Param('mid', ParseIntPipe, ParseIntPipe) mid: number,
     @Request() req,
   ) {
-    return this.klassesService.updateMember(id, updateKlassMemberDto, req.user);
+    return this.klassesService.updateMember(
+      mid,
+      updateKlassMemberDto,
+      req.user,
+    );
   }
 
   @Delete(':kid/members/:mid')
-  removeMember(@Param('mid', ParseIntPipe) id: number, @Request() req) {
-    return this.klassesService.removeMember(id, req.user);
+  removeMember(
+    @Param('mid', ParseIntPipe) mid: number,
+    @Param('kid', ParseIntPipe) kid: number,
+    @Request() req,
+  ) {
+    return this.klassesService.removeMember(mid, req.user);
   }
 }

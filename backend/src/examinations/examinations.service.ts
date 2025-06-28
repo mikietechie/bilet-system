@@ -5,9 +5,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Examination } from './entities/examination.entity';
 import { Repository } from 'typeorm';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload-dto';
-import { checkOwnerShipPermissions } from 'src/utils/permissions.utils';
+import { checkOwnerShipPermissions } from 'src/common/permissions.utils';
 import { Mark } from 'src/marks/entities/mark.entity';
-import { idAsIBaseAny } from 'src/utils/base.utils';
+import { idAsIBaseAny } from 'src/common/base/utils';
 
 @Injectable()
 export class ExaminationsService {
