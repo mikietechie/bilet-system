@@ -8,12 +8,18 @@ import {
   Delete,
   ParseIntPipe,
   Request,
+  UseGuards,
 } from '@nestjs/common';
 import { MarksService } from './marks.service';
 import { CreateMarkDto } from './dto/create-mark.dto';
 import { UpdateMarkDto } from './dto/update-mark.dto';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth/jwt-auth.guard';
 
-@Controller('marks')
+@ApiTags('marks')
+@ApiBearerAuth()
+@Controller('api/v1/marks')
+@UseGuards(JwtAuthGuard)
 export class MarksController {
   constructor(private readonly marksService: MarksService) {}
 

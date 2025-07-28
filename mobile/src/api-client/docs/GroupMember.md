@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **isActive** | **boolean** |  | [default to undefined]
 **isAdmin** | **boolean** |  | [default to undefined]
 **user** | [**User**](User.md) |  | [default to undefined]
@@ -16,6 +21,11 @@ Name | Type | Description | Notes
 import { GroupMember } from './api';
 
 const instance: GroupMember = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     isActive,
     isAdmin,
     user,

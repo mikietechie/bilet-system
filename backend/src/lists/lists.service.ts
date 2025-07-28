@@ -71,13 +71,14 @@ export class ListsService {
 
   async findAllQuestions(listId: number): Promise<Question[]> {
     const list = await this.getListWithOwner(listId);
-    return await this.questionsRepository.findBy({ list });
+    return await this.questionsRepository.findBy({ list: { id: list.id } });
   }
 
   async checkAlterPermissions(list: List, token: JwtPayloadDto) {
-    if (!(token.role === UserRole.ADMIN) || token.userId !== list.owner.id) {
-      throw new UnauthorizedException();
+    if (token.role === UserRole.ADMIN || token.userId === list.owner.id) {
+      return;
     }
+    throw new UnauthorizedException();
   }
 
   async getListWithOwner(id: number): Promise<List> {

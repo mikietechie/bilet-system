@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 |[**authControllerActivate**](#authcontrolleractivate) | **GET** /api/v1/auth/activate/{email}/{key} | |
 |[**authControllerLogin**](#authcontrollerlogin) | **POST** /api/v1/auth/login | |
 |[**authControllerRegister**](#authcontrollerregister) | **POST** /api/v1/auth/register | |
+|[**authControllerUser**](#authcontrolleruser) | **GET** /api/v1/auth/user | |
 
 # **authControllerActivate**
 > authControllerActivate()
@@ -160,6 +161,49 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authControllerUser**
+> User authControllerUser()
+
+
+### Example
+
+```typescript
+import {
+    AuthApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new AuthApi(configuration);
+
+const { status, data } = await apiInstance.authControllerUser();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**User**
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

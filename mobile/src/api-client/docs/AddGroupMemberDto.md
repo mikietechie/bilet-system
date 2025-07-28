@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **number** |  | [default to undefined]
+**email** | **string** |  | [default to undefined]
 **isAdmin** | **boolean** |  | [default to undefined]
 
 ## Example
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 import { AddGroupMemberDto } from './api';
 
 const instance: AddGroupMemberDto = {
-    userId,
+    email,
     isAdmin,
 };
 ```

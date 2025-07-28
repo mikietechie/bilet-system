@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **title** | **string** |  | [default to undefined]
 **text** | **string** |  | [default to undefined]
 **question** | [**Question**](Question.md) |  | [default to undefined]
@@ -16,6 +21,11 @@ Name | Type | Description | Notes
 import { Answer } from './api';
 
 const instance: Answer = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     title,
     text,
     question,

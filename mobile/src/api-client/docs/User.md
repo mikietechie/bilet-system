@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **email** | **string** |  | [default to undefined]
 **password** | **string** |  | [default to undefined]
@@ -20,6 +25,11 @@ Name | Type | Description | Notes
 import { User } from './api';
 
 const instance: User = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     name,
     email,
     password,

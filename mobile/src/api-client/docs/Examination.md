@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **title** | **string** |  | [default to undefined]
 **date** | **string** |  | [default to undefined]
 **list** | [**List**](List.md) |  | [default to undefined]
@@ -17,6 +22,11 @@ Name | Type | Description | Notes
 import { Examination } from './api';
 
 const instance: Examination = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     title,
     date,
     list,

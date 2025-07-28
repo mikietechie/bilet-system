@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**accountsControllerDeleteAccount**](#accountscontrollerdeleteaccount) | **DELETE** /accounts/delete-account | |
-|[**accountsControllerFindOne**](#accountscontrollerfindone) | **GET** /accounts | |
-|[**accountsControllerRecoverPassword**](#accountscontrollerrecoverpassword) | **PATCH** /accounts/recover-password | |
-|[**accountsControllerResetPassword**](#accountscontrollerresetpassword) | **PATCH** /accounts/reset-password | |
-|[**accountsControllerUpdate**](#accountscontrollerupdate) | **PATCH** /accounts | |
+|[**accountsControllerDeleteAccount**](#accountscontrollerdeleteaccount) | **DELETE** /api/v1/accounts/delete-account | |
+|[**accountsControllerFindOne**](#accountscontrollerfindone) | **GET** /api/v1/accounts | |
+|[**accountsControllerRecoverPassword**](#accountscontrollerrecoverpassword) | **PATCH** /api/v1/accounts/recover-password | |
+|[**accountsControllerResetPassword**](#accountscontrollerresetpassword) | **PATCH** /api/v1/accounts/reset-password | |
+|[**accountsControllerUpdate**](#accountscontrollerupdate) | **PATCH** /api/v1/accounts | |
 
 # **accountsControllerDeleteAccount**
 > accountsControllerDeleteAccount()
@@ -38,7 +38,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -81,7 +81,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -132,7 +132,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -183,7 +183,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -234,7 +234,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 

@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **level** | **string** |  | [default to undefined]
 **lists** | [**Array&lt;List&gt;**](List.md) |  | [default to undefined]
@@ -16,6 +21,11 @@ Name | Type | Description | Notes
 import { Subject } from './api';
 
 const instance: Subject = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     name,
     level,
     lists,

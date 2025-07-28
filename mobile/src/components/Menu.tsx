@@ -8,11 +8,23 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
-} from '@ionic/react';
+} from "@ionic/react";
 
-import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
-import './Menu.css';
+import { useLocation } from "react-router-dom";
+import {
+  bookmarkOutline,
+  bookOutline,
+  bookSharp,
+  listOutline,
+  listSharp,
+  logOutOutline,
+  logOutSharp,
+  settingsOutline,
+  settingsSharp,
+} from "ionicons/icons";
+import "./Menu.css";
+import { useContext } from "react";
+import { ApiCtx, getDefaultConfiguration } from "../contexts/api-context";
 
 interface AppPage {
   url: string;
@@ -23,64 +35,77 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: 'Inbox',
-    url: '/folder/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
+    title: "Subjects",
+    url: "/subjects",
+    iosIcon: bookOutline,
+    mdIcon: bookSharp,
   },
   {
-    title: 'Outbox',
-    url: '/folder/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
+    title: "Manage Groups",
+    url: "/manage-groups",
+    iosIcon: settingsOutline,
+    mdIcon: settingsSharp,
   },
   {
-    title: 'Favorites',
-    url: '/folder/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
+    title: "Manage Lists",
+    url: "/manage-lists",
+    iosIcon: listOutline,
+    mdIcon: listSharp,
   },
-  {
-    title: 'Archived',
-    url: '/folder/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp
-  },
-  {
-    title: 'Trash',
-    url: '/folder/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
-  },
-  {
-    title: 'Spam',
-    url: '/folder/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
 ];
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+const labels = ["Family", "Friends", "Notes", "Work", "Travel", "Reminders"];
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const apiCtx = useContext(ApiCtx);
 
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>{apiCtx?.user?.name}</IonListHeader>
+          <IonNote>{apiCtx?.user?.email}</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon aria-hidden="true" slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                <IonItem
+                  className={
+                    location.pathname === appPage.url ? "selected" : ""
+                  }
+                  routerLink={appPage.url}
+                  routerDirection="none"
+                  lines="none"
+                  detail={false}
+                >
+                  <IonIcon
+                    aria-hidden="true"
+                    slot="start"
+                    ios={appPage.iosIcon}
+                    md={appPage.mdIcon}
+                  />
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
             );
           })}
+          <IonMenuToggle key={-1} autoHide={false}>
+            <IonItem
+              onClick={() =>
+                apiCtx?.setConfiguration(getDefaultConfiguration())
+              }
+              lines="none"
+              detail={false}
+            >
+              <IonIcon
+                aria-hidden="true"
+                slot="start"
+                ios={logOutOutline}
+                md={logOutSharp}
+              />
+              <IonLabel>Logout</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
         </IonList>
 
         <IonList id="labels-list">

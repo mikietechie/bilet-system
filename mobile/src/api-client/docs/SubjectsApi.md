@@ -47,7 +47,7 @@ const { status, data } = await apiInstance.subjectsControllerCreate(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -90,7 +90,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -140,7 +140,7 @@ const { status, data } = await apiInstance.subjectsControllerFindNotes(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -190,7 +190,7 @@ const { status, data } = await apiInstance.subjectsControllerFindOne(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -240,7 +240,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -294,7 +294,7 @@ const { status, data } = await apiInstance.subjectsControllerUpdate(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 

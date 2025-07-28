@@ -8,12 +8,18 @@ import {
   Delete,
   Request,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { QuestionsService } from './questions.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth/jwt-auth.guard';
 
-@Controller('questions')
+@ApiTags('questions')
+@ApiBearerAuth()
+@Controller('api/v1/questions')
+@UseGuards(JwtAuthGuard)
 export class QuestionsController {
   constructor(private readonly questionsService: QuestionsService) {}
 

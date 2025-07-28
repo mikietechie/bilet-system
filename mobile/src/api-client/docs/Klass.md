@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **isPublic** | **boolean** |  | [default to undefined]
 **membersNeedActivation** | **boolean** |  | [default to undefined]
@@ -17,6 +22,11 @@ Name | Type | Description | Notes
 import { Klass } from './api';
 
 const instance: Klass = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     name,
     isPublic,
     membersNeedActivation,

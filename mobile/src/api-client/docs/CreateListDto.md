@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** |  | [default to undefined]
+**subjectId** | **number** |  | [default to undefined]
 
 ## Example
 
@@ -14,6 +15,7 @@ import { CreateListDto } from './api';
 
 const instance: CreateListDto = {
     name,
+    subjectId,
 };
 ```
 

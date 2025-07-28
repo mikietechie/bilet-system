@@ -1,14 +1,14 @@
 import { createContext } from "react";
-import { Configuration } from "../api-client";
+import { Configuration, User } from "../api-client";
 
 export interface IApiCtx {
-  user?: unknown;
-  setUser: (user: boolean) => void;
+  user?: User;
+  setUser: (user: User) => void;
   configuration: Configuration;
   setConfiguration: (configuration: Configuration) => void;
 }
 
-export const defaultConfiguration = new Configuration({
+export const getDefaultConfiguration = () => new Configuration({
   basePath: "http://localhost:8000",
 });
 

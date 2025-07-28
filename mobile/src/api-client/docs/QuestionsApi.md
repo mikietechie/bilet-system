@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**questionsControllerCreate**](#questionscontrollercreate) | **POST** /questions | |
-|[**questionsControllerFindAll**](#questionscontrollerfindall) | **GET** /questions | |
-|[**questionsControllerFindOne**](#questionscontrollerfindone) | **GET** /questions/{id} | |
-|[**questionsControllerRemove**](#questionscontrollerremove) | **DELETE** /questions/{id} | |
-|[**questionsControllerUpdate**](#questionscontrollerupdate) | **PATCH** /questions/{id} | |
+|[**questionsControllerCreate**](#questionscontrollercreate) | **POST** /api/v1/questions | |
+|[**questionsControllerFindAll**](#questionscontrollerfindall) | **GET** /api/v1/questions | |
+|[**questionsControllerFindOne**](#questionscontrollerfindone) | **GET** /api/v1/questions/{id} | |
+|[**questionsControllerRemove**](#questionscontrollerremove) | **DELETE** /api/v1/questions/{id} | |
+|[**questionsControllerUpdate**](#questionscontrollerupdate) | **PATCH** /api/v1/questions/{id} | |
 
 # **questionsControllerCreate**
 > number questionsControllerCreate(createQuestionDto)
@@ -46,7 +46,7 @@ const { status, data } = await apiInstance.questionsControllerCreate(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -89,7 +89,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -139,7 +139,7 @@ const { status, data } = await apiInstance.questionsControllerFindOne(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -189,7 +189,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -243,7 +243,7 @@ const { status, data } = await apiInstance.questionsControllerUpdate(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 

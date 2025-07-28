@@ -3,6 +3,7 @@ import {
   IonRouterOutlet,
   IonSplitPane,
   setupIonicReact,
+  useIonAlert,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
@@ -39,14 +40,43 @@ import "@ionic/react/css/palettes/dark.system.css";
 /* Theme variables */
 import "./theme/variables.css";
 import AuthPage from "./pages/Auth";
-import { useState } from "react";
-import { ApiCtx, defaultConfiguration } from "./contexts/api-context";
+import { useEffect, useState } from "react";
+import { ApiCtx, getDefaultConfiguration } from "./contexts/api-context";
+import SubjectsPage from "./pages/Subjects";
+import SubjectPage from "./pages/Subject";
+import { AuthApi, User } from "./api-client";
+import ManageGroup from "./pages/ManageGroup";
+import ManageGroups from "./pages/ManageGroups";
+import ManageLists from "./pages/ManageLists";
+import ManageList from "./pages/ManageList";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [configuration, setConfiguration] = useState(defaultConfiguration);
-  const [user, setUser] = useState(false);
+  const [configuration, setConfiguration] = useState(getDefaultConfiguration());
+  const [user, setUser] = useState<User>();
+  const [presentAlert] = useIonAlert();
+
+  useEffect(() => {
+    if (configuration.accessToken) {
+      const authApi = new AuthApi(configuration);
+      authApi
+        .authControllerUser()
+        .then((res) => {
+          if (res.status === 200) {
+            setUser(res.data);
+          } else {
+            throw new Error(res.statusText);
+          }
+        })
+        .catch((res) => {
+          setUser(undefined);
+          presentAlert({ header: `Error`, message: `${res}` });
+        });
+    } else {
+      setUser(undefined);
+    }
+  }, [configuration, presentAlert]);
 
   return (
     <IonApp>
@@ -63,6 +93,24 @@ const App: React.FC = () => {
                 </Route>
                 <Route path="/folder/:name" exact={true}>
                   <Page />
+                </Route>
+                <Route path="/subjects" exact={true}>
+                  <SubjectsPage />
+                </Route>
+                <Route path="/subject/:subjectId" exact={true}>
+                  <SubjectPage />
+                </Route>
+                <Route path="/manage-groups" exact={true}>
+                  <ManageGroups />
+                </Route>
+                <Route path="/manage-group/:groupId" exact={true}>
+                  <ManageGroup />
+                </Route>
+                <Route path="/manage-lists" exact={true}>
+                  <ManageLists />
+                </Route>
+                <Route path="/manage-list/:listId" exact={true}>
+                  <ManageList />
                 </Route>
               </IonRouterOutlet>
             </IonSplitPane>

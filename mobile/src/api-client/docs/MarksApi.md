@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**marksControllerCreate**](#markscontrollercreate) | **POST** /marks | |
-|[**marksControllerFindAll**](#markscontrollerfindall) | **GET** /marks | |
-|[**marksControllerFindAllMarksByUser**](#markscontrollerfindallmarksbyuser) | **GET** /marks/my-marks | |
-|[**marksControllerFindOne**](#markscontrollerfindone) | **GET** /marks/{id} | |
-|[**marksControllerRemove**](#markscontrollerremove) | **DELETE** /marks/{id} | |
-|[**marksControllerUpdate**](#markscontrollerupdate) | **PATCH** /marks/{id} | |
+|[**marksControllerCreate**](#markscontrollercreate) | **POST** /api/v1/marks | |
+|[**marksControllerFindAll**](#markscontrollerfindall) | **GET** /api/v1/marks | |
+|[**marksControllerFindAllMarksByUser**](#markscontrollerfindallmarksbyuser) | **GET** /api/v1/marks/my-marks | |
+|[**marksControllerFindOne**](#markscontrollerfindone) | **GET** /api/v1/marks/{id} | |
+|[**marksControllerRemove**](#markscontrollerremove) | **DELETE** /api/v1/marks/{id} | |
+|[**marksControllerUpdate**](#markscontrollerupdate) | **PATCH** /api/v1/marks/{id} | |
 
 # **marksControllerCreate**
 > number marksControllerCreate(createMarkDto)
@@ -47,7 +47,7 @@ const { status, data } = await apiInstance.marksControllerCreate(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -90,7 +90,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -133,7 +133,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -183,7 +183,7 @@ const { status, data } = await apiInstance.marksControllerFindOne(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -233,7 +233,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -287,7 +287,7 @@ const { status, data } = await apiInstance.marksControllerUpdate(
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 

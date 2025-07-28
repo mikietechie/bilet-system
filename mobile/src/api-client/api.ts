@@ -31,16 +31,29 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 export interface AddGroupMemberDto {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AddGroupMemberDto
      */
-    'userId': number;
+    'email': string;
     /**
      * 
      * @type {boolean}
      * @memberof AddGroupMemberDto
      */
     'isAdmin': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface AddGroupUserDto
+ */
+export interface AddGroupUserDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AddGroupUserDto
+     */
+    'email': string;
 }
 /**
  * 
@@ -67,6 +80,36 @@ export interface AddKlassMemberDto {
  * @interface Answer
  */
 export interface Answer {
+    /**
+     * 
+     * @type {number}
+     * @memberof Answer
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Answer
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Answer
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Answer
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Answer
+     */
+    '_version': number;
     /**
      * 
      * @type {string}
@@ -98,6 +141,36 @@ export interface Answer {
  * @interface Bookmark
  */
 export interface Bookmark {
+    /**
+     * 
+     * @type {number}
+     * @memberof Bookmark
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Bookmark
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Bookmark
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Bookmark
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Bookmark
+     */
+    '_version': number;
     /**
      * 
      * @type {number}
@@ -272,6 +345,12 @@ export interface CreateListDto {
      * @memberof CreateListDto
      */
     'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateListDto
+     */
+    'subjectId': number;
 }
 /**
  * 
@@ -460,6 +539,36 @@ export type CreateUserDtoRoleEnum = typeof CreateUserDtoRoleEnum[keyof typeof Cr
 export interface Examination {
     /**
      * 
+     * @type {number}
+     * @memberof Examination
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Examination
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Examination
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Examination
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Examination
+     */
+    '_version': number;
+    /**
+     * 
      * @type {string}
      * @memberof Examination
      */
@@ -497,6 +606,36 @@ export interface Examination {
 export interface Group {
     /**
      * 
+     * @type {number}
+     * @memberof Group
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Group
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Group
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Group
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Group
+     */
+    '_version': number;
+    /**
+     * 
      * @type {string}
      * @memberof Group
      */
@@ -525,6 +664,12 @@ export interface Group {
      * @memberof Group
      */
     'memberships': Array<GroupMember>;
+    /**
+     * 
+     * @type {Array<GroupUser>}
+     * @memberof Group
+     */
+    'users': Array<GroupUser>;
 }
 /**
  * 
@@ -532,6 +677,36 @@ export interface Group {
  * @interface GroupMember
  */
 export interface GroupMember {
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupMember
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupMember
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupMember
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupMember
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupMember
+     */
+    '_version': number;
     /**
      * 
      * @type {boolean}
@@ -560,9 +735,143 @@ export interface GroupMember {
 /**
  * 
  * @export
+ * @interface GroupMembersResponseItemDto
+ */
+export interface GroupMembersResponseItemDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupMembersResponseItemDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupMembersResponseItemDto
+     */
+    'userId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupMembersResponseItemDto
+     */
+    'groupId': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupMembersResponseItemDto
+     */
+    'isActive': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupMembersResponseItemDto
+     */
+    'isAdmin': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupMembersResponseItemDto
+     */
+    'userName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupMembersResponseItemDto
+     */
+    'userEmail': string;
+}
+/**
+ * 
+ * @export
+ * @interface GroupUser
+ */
+export interface GroupUser {
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupUser
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUser
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUser
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUser
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupUser
+     */
+    '_version': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupUser
+     */
+    'isActive': boolean;
+    /**
+     * 
+     * @type {User}
+     * @memberof GroupUser
+     */
+    'user': User;
+    /**
+     * 
+     * @type {Group}
+     * @memberof GroupUser
+     */
+    'group': Group;
+}
+/**
+ * 
+ * @export
  * @interface Klass
  */
 export interface Klass {
+    /**
+     * 
+     * @type {number}
+     * @memberof Klass
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Klass
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Klass
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Klass
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Klass
+     */
+    '_version': number;
     /**
      * 
      * @type {string}
@@ -602,6 +911,36 @@ export interface Klass {
 export interface KlassMember {
     /**
      * 
+     * @type {number}
+     * @memberof KlassMember
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof KlassMember
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KlassMember
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KlassMember
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof KlassMember
+     */
+    '_version': number;
+    /**
+     * 
      * @type {boolean}
      * @memberof KlassMember
      */
@@ -631,6 +970,36 @@ export interface KlassMember {
  * @interface List
  */
 export interface List {
+    /**
+     * 
+     * @type {number}
+     * @memberof List
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof List
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof List
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof List
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof List
+     */
+    '_version': number;
     /**
      * 
      * @type {string}
@@ -714,6 +1083,36 @@ export interface LoginResponseDto {
 export interface Mark {
     /**
      * 
+     * @type {number}
+     * @memberof Mark
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Mark
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Mark
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Mark
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Mark
+     */
+    '_version': number;
+    /**
+     * 
      * @type {string}
      * @memberof Mark
      */
@@ -751,6 +1150,36 @@ export interface Mark {
 export interface Note {
     /**
      * 
+     * @type {number}
+     * @memberof Note
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Note
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Note
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Note
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Note
+     */
+    '_version': number;
+    /**
+     * 
      * @type {string}
      * @memberof Note
      */
@@ -786,6 +1215,36 @@ export interface Note {
  * @interface Question
  */
 export interface Question {
+    /**
+     * 
+     * @type {number}
+     * @memberof Question
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Question
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Question
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Question
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Question
+     */
+    '_version': number;
     /**
      * 
      * @type {string}
@@ -882,6 +1341,36 @@ export interface ResetPasswordDto {
 export interface Subject {
     /**
      * 
+     * @type {number}
+     * @memberof Subject
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Subject
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Subject
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Subject
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Subject
+     */
+    '_version': number;
+    /**
+     * 
      * @type {string}
      * @memberof Subject
      */
@@ -920,6 +1409,36 @@ export type SubjectLevelEnum = typeof SubjectLevelEnum[keyof typeof SubjectLevel
  * @interface Ticket
  */
 export interface Ticket {
+    /**
+     * 
+     * @type {number}
+     * @memberof Ticket
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Ticket
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Ticket
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Ticket
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Ticket
+     */
+    '_version': number;
     /**
      * 
      * @type {string}
@@ -1073,6 +1592,19 @@ export interface UpdateGroupMemberDto {
 /**
  * 
  * @export
+ * @interface UpdateGroupUserDto
+ */
+export interface UpdateGroupUserDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateGroupUserDto
+     */
+    'isActive': boolean;
+}
+/**
+ * 
+ * @export
  * @interface UpdateKlassDto
  */
 export interface UpdateKlassDto {
@@ -1126,6 +1658,12 @@ export interface UpdateListDto {
      * @memberof UpdateListDto
      */
     'name'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateListDto
+     */
+    'subjectId'?: number;
 }
 /**
  * 
@@ -1320,6 +1858,36 @@ export type UpdateUserDtoRoleEnum = typeof UpdateUserDtoRoleEnum[keyof typeof Up
 export interface User {
     /**
      * 
+     * @type {number}
+     * @memberof User
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'deletedAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof User
+     */
+    '_version': number;
+    /**
+     * 
      * @type {string}
      * @memberof User
      */
@@ -1388,7 +1956,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         accountsControllerDeleteAccount: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/accounts/delete-account`;
+            const localVarPath = `/api/v1/accounts/delete-account`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1399,6 +1967,10 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1417,7 +1989,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         accountsControllerFindOne: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/accounts`;
+            const localVarPath = `/api/v1/accounts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1428,6 +2000,10 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1449,7 +2025,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         accountsControllerRecoverPassword: async (recoverPasswordDto: RecoverPasswordDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'recoverPasswordDto' is not null or undefined
             assertParamExists('accountsControllerRecoverPassword', 'recoverPasswordDto', recoverPasswordDto)
-            const localVarPath = `/accounts/recover-password`;
+            const localVarPath = `/api/v1/accounts/recover-password`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1460,6 +2036,10 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1484,7 +2064,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         accountsControllerResetPassword: async (resetPasswordDto: ResetPasswordDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'resetPasswordDto' is not null or undefined
             assertParamExists('accountsControllerResetPassword', 'resetPasswordDto', resetPasswordDto)
-            const localVarPath = `/accounts/reset-password`;
+            const localVarPath = `/api/v1/accounts/reset-password`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1495,6 +2075,10 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1519,7 +2103,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         accountsControllerUpdate: async (updateAccountDto: UpdateAccountDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'updateAccountDto' is not null or undefined
             assertParamExists('accountsControllerUpdate', 'updateAccountDto', updateAccountDto)
-            const localVarPath = `/accounts`;
+            const localVarPath = `/api/v1/accounts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1530,6 +2114,10 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -2330,6 +2918,39 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerUser: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/auth/user`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -2377,6 +2998,17 @@ export const AuthApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerRegister']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerUser(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerUser(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerUser']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -2414,6 +3046,14 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          */
         authControllerRegister(registerDto: RegisterDto, options?: RawAxiosRequestConfig): AxiosPromise<number> {
             return localVarFp.authControllerRegister(registerDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerUser(options?: RawAxiosRequestConfig): AxiosPromise<User> {
+            return localVarFp.authControllerUser(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2457,6 +3097,16 @@ export class AuthApi extends BaseAPI {
      */
     public authControllerRegister(registerDto: RegisterDto, options?: RawAxiosRequestConfig) {
         return AuthApiFp(this.configuration).authControllerRegister(registerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authControllerUser(options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerUser(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3299,18 +3949,18 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {AddGroupMemberDto} addGroupMemberDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerAddMember: async (gid: number, addGroupMemberDto: AddGroupMemberDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'gid' is not null or undefined
-            assertParamExists('groupsControllerAddMember', 'gid', gid)
+        groupsControllerAddMember: async (groupId: number, addGroupMemberDto: AddGroupMemberDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerAddMember', 'groupId', groupId)
             // verify required parameter 'addGroupMemberDto' is not null or undefined
             assertParamExists('groupsControllerAddMember', 'addGroupMemberDto', addGroupMemberDto)
-            const localVarPath = `/api/v1/groups/{gid}/members`
-                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            const localVarPath = `/api/v1/groups/{groupId}/members`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3334,6 +3984,49 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(addGroupMemberDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {AddGroupUserDto} addGroupUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerAddUser: async (groupId: number, addGroupUserDto: AddGroupUserDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerAddUser', 'groupId', groupId)
+            // verify required parameter 'addGroupUserDto' is not null or undefined
+            assertParamExists('groupsControllerAddUser', 'addGroupUserDto', addGroupUserDto)
+            const localVarPath = `/api/v1/groups/{groupId}/users`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addGroupUserDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3517,15 +4210,48 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {number} gid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerReadMembers: async (gid: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'gid' is not null or undefined
-            assertParamExists('groupsControllerReadMembers', 'gid', gid)
-            const localVarPath = `/api/v1/groups/{gid}/members`
-                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+        groupsControllerFindUserGroups: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/groups/user`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerReadMembers: async (groupId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerReadMembers', 'groupId', groupId)
+            const localVarPath = `/api/v1/groups/{groupId}/members`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3592,18 +4318,59 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {number} mid 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerRemoveMember: async (mid: number, gid: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        groupsControllerRemoveMember: async (mid: number, groupId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'mid' is not null or undefined
             assertParamExists('groupsControllerRemoveMember', 'mid', mid)
-            // verify required parameter 'gid' is not null or undefined
-            assertParamExists('groupsControllerRemoveMember', 'gid', gid)
-            const localVarPath = `/api/v1/groups/{gid}/members/{mid}`
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerRemoveMember', 'groupId', groupId)
+            const localVarPath = `/api/v1/groups/{groupId}/members/{mid}`
                 .replace(`{${"mid"}}`, encodeURIComponent(String(mid)))
-                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} mid 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerRemoveUser: async (mid: number, groupId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'mid' is not null or undefined
+            assertParamExists('groupsControllerRemoveUser', 'mid', mid)
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerRemoveUser', 'groupId', groupId)
+            const localVarPath = `/api/v1/groups/{groupId}/users/{mid}`
+                .replace(`{${"mid"}}`, encodeURIComponent(String(mid)))
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3675,21 +4442,21 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {number} mid 
          * @param {UpdateGroupMemberDto} updateGroupMemberDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerUpdateMember: async (gid: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'gid' is not null or undefined
-            assertParamExists('groupsControllerUpdateMember', 'gid', gid)
+        groupsControllerUpdateMember: async (groupId: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerUpdateMember', 'groupId', groupId)
             // verify required parameter 'mid' is not null or undefined
             assertParamExists('groupsControllerUpdateMember', 'mid', mid)
             // verify required parameter 'updateGroupMemberDto' is not null or undefined
             assertParamExists('groupsControllerUpdateMember', 'updateGroupMemberDto', updateGroupMemberDto)
-            const localVarPath = `/api/v1/groups/{gid}/members/{mid}`
-                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)))
+            const localVarPath = `/api/v1/groups/{groupId}/members/{mid}`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)))
                 .replace(`{${"mid"}}`, encodeURIComponent(String(mid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3720,6 +4487,53 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {number} mid 
+         * @param {UpdateGroupUserDto} updateGroupUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerUpdateUser: async (groupId: number, mid: number, updateGroupUserDto: UpdateGroupUserDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerUpdateUser', 'groupId', groupId)
+            // verify required parameter 'mid' is not null or undefined
+            assertParamExists('groupsControllerUpdateUser', 'mid', mid)
+            // verify required parameter 'updateGroupUserDto' is not null or undefined
+            assertParamExists('groupsControllerUpdateUser', 'updateGroupUserDto', updateGroupUserDto)
+            const localVarPath = `/api/v1/groups/{groupId}/users/{mid}`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)))
+                .replace(`{${"mid"}}`, encodeURIComponent(String(mid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateGroupUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -3732,15 +4546,28 @@ export const GroupsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {AddGroupMemberDto} addGroupMemberDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async groupsControllerAddMember(gid: number, addGroupMemberDto: AddGroupMemberDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerAddMember(gid, addGroupMemberDto, options);
+        async groupsControllerAddMember(groupId: number, addGroupMemberDto: AddGroupMemberDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerAddMember(groupId, addGroupMemberDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerAddMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {AddGroupUserDto} addGroupUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupsControllerAddUser(groupId: number, addGroupUserDto: AddGroupUserDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerAddUser(groupId, addGroupUserDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerAddUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3802,12 +4629,23 @@ export const GroupsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} gid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async groupsControllerReadMembers(gid: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupMember>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerReadMembers(gid, options);
+        async groupsControllerFindUserGroups(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupUser>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerFindUserGroups(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerFindUserGroups']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupsControllerReadMembers(groupId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupMembersResponseItemDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerReadMembers(groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerReadMembers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3827,14 +4665,27 @@ export const GroupsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} mid 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async groupsControllerRemoveMember(mid: number, gid: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerRemoveMember(mid, gid, options);
+        async groupsControllerRemoveMember(mid: number, groupId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerRemoveMember(mid, groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerRemoveMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} mid 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupsControllerRemoveUser(mid: number, groupId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerRemoveUser(mid, groupId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerRemoveUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3852,16 +4703,30 @@ export const GroupsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {number} mid 
          * @param {UpdateGroupMemberDto} updateGroupMemberDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async groupsControllerUpdateMember(gid: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerUpdateMember(gid, mid, updateGroupMemberDto, options);
+        async groupsControllerUpdateMember(groupId: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerUpdateMember(groupId, mid, updateGroupMemberDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerUpdateMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {number} mid 
+         * @param {UpdateGroupUserDto} updateGroupUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupsControllerUpdateUser(groupId: number, mid: number, updateGroupUserDto: UpdateGroupUserDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerUpdateUser(groupId, mid, updateGroupUserDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerUpdateUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -3876,13 +4741,23 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
     return {
         /**
          * 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {AddGroupMemberDto} addGroupMemberDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerAddMember(gid: number, addGroupMemberDto: AddGroupMemberDto, options?: RawAxiosRequestConfig): AxiosPromise<number> {
-            return localVarFp.groupsControllerAddMember(gid, addGroupMemberDto, options).then((request) => request(axios, basePath));
+        groupsControllerAddMember(groupId: number, addGroupMemberDto: AddGroupMemberDto, options?: RawAxiosRequestConfig): AxiosPromise<number> {
+            return localVarFp.groupsControllerAddMember(groupId, addGroupMemberDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {AddGroupUserDto} addGroupUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerAddUser(groupId: number, addGroupUserDto: AddGroupUserDto, options?: RawAxiosRequestConfig): AxiosPromise<number> {
+            return localVarFp.groupsControllerAddUser(groupId, addGroupUserDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3928,12 +4803,20 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @param {number} gid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerReadMembers(gid: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupMember>> {
-            return localVarFp.groupsControllerReadMembers(gid, options).then((request) => request(axios, basePath));
+        groupsControllerFindUserGroups(options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupUser>> {
+            return localVarFp.groupsControllerFindUserGroups(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerReadMembers(groupId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupMembersResponseItemDto>> {
+            return localVarFp.groupsControllerReadMembers(groupId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3947,12 +4830,22 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @param {number} mid 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerRemoveMember(mid: number, gid: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.groupsControllerRemoveMember(mid, gid, options).then((request) => request(axios, basePath));
+        groupsControllerRemoveMember(mid: number, groupId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.groupsControllerRemoveMember(mid, groupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} mid 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerRemoveUser(mid: number, groupId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.groupsControllerRemoveUser(mid, groupId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3966,14 +4859,25 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @param {number} gid 
+         * @param {number} groupId 
          * @param {number} mid 
          * @param {UpdateGroupMemberDto} updateGroupMemberDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerUpdateMember(gid: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.groupsControllerUpdateMember(gid, mid, updateGroupMemberDto, options).then((request) => request(axios, basePath));
+        groupsControllerUpdateMember(groupId: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.groupsControllerUpdateMember(groupId, mid, updateGroupMemberDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {number} mid 
+         * @param {UpdateGroupUserDto} updateGroupUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupsControllerUpdateUser(groupId: number, mid: number, updateGroupUserDto: UpdateGroupUserDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.groupsControllerUpdateUser(groupId, mid, updateGroupUserDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3987,14 +4891,26 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
 export class GroupsApi extends BaseAPI {
     /**
      * 
-     * @param {number} gid 
+     * @param {number} groupId 
      * @param {AddGroupMemberDto} addGroupMemberDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public groupsControllerAddMember(gid: number, addGroupMemberDto: AddGroupMemberDto, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).groupsControllerAddMember(gid, addGroupMemberDto, options).then((request) => request(this.axios, this.basePath));
+    public groupsControllerAddMember(groupId: number, addGroupMemberDto: AddGroupMemberDto, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerAddMember(groupId, addGroupMemberDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} groupId 
+     * @param {AddGroupUserDto} addGroupUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public groupsControllerAddUser(groupId: number, addGroupUserDto: AddGroupUserDto, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerAddUser(groupId, addGroupUserDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4051,13 +4967,23 @@ export class GroupsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} gid 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public groupsControllerReadMembers(gid: number, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).groupsControllerReadMembers(gid, options).then((request) => request(this.axios, this.basePath));
+    public groupsControllerFindUserGroups(options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerFindUserGroups(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} groupId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public groupsControllerReadMembers(groupId: number, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerReadMembers(groupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4074,13 +5000,25 @@ export class GroupsApi extends BaseAPI {
     /**
      * 
      * @param {number} mid 
-     * @param {number} gid 
+     * @param {number} groupId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public groupsControllerRemoveMember(mid: number, gid: number, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).groupsControllerRemoveMember(mid, gid, options).then((request) => request(this.axios, this.basePath));
+    public groupsControllerRemoveMember(mid: number, groupId: number, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerRemoveMember(mid, groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} mid 
+     * @param {number} groupId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public groupsControllerRemoveUser(mid: number, groupId: number, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerRemoveUser(mid, groupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4097,15 +5035,28 @@ export class GroupsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} gid 
+     * @param {number} groupId 
      * @param {number} mid 
      * @param {UpdateGroupMemberDto} updateGroupMemberDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public groupsControllerUpdateMember(gid: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).groupsControllerUpdateMember(gid, mid, updateGroupMemberDto, options).then((request) => request(this.axios, this.basePath));
+    public groupsControllerUpdateMember(groupId: number, mid: number, updateGroupMemberDto: UpdateGroupMemberDto, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerUpdateMember(groupId, mid, updateGroupMemberDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} groupId 
+     * @param {number} mid 
+     * @param {UpdateGroupUserDto} updateGroupUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public groupsControllerUpdateUser(groupId: number, mid: number, updateGroupUserDto: UpdateGroupUserDto, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerUpdateUser(groupId, mid, updateGroupUserDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5465,7 +6416,7 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
         marksControllerCreate: async (createMarkDto: CreateMarkDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'createMarkDto' is not null or undefined
             assertParamExists('marksControllerCreate', 'createMarkDto', createMarkDto)
-            const localVarPath = `/marks`;
+            const localVarPath = `/api/v1/marks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5476,6 +6427,10 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -5497,7 +6452,7 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         marksControllerFindAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/marks`;
+            const localVarPath = `/api/v1/marks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5508,6 +6463,10 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -5526,7 +6485,7 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         marksControllerFindAllMarksByUser: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/marks/my-marks`;
+            const localVarPath = `/api/v1/marks/my-marks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5537,6 +6496,10 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -5558,7 +6521,7 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
         marksControllerFindOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('marksControllerFindOne', 'id', id)
-            const localVarPath = `/marks/{id}`
+            const localVarPath = `/api/v1/marks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5570,6 +6533,10 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -5591,7 +6558,7 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
         marksControllerRemove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('marksControllerRemove', 'id', id)
-            const localVarPath = `/marks/{id}`
+            const localVarPath = `/api/v1/marks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5603,6 +6570,10 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -5627,7 +6598,7 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('marksControllerUpdate', 'id', id)
             // verify required parameter 'updateMarkDto' is not null or undefined
             assertParamExists('marksControllerUpdate', 'updateMarkDto', updateMarkDto)
-            const localVarPath = `/marks/{id}`
+            const localVarPath = `/api/v1/marks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5639,6 +6610,10 @@ export const MarksApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6341,7 +7316,7 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
         questionsControllerCreate: async (createQuestionDto: CreateQuestionDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'createQuestionDto' is not null or undefined
             assertParamExists('questionsControllerCreate', 'createQuestionDto', createQuestionDto)
-            const localVarPath = `/questions`;
+            const localVarPath = `/api/v1/questions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6352,6 +7327,10 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6373,7 +7352,7 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
          * @throws {RequiredError}
          */
         questionsControllerFindAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/questions`;
+            const localVarPath = `/api/v1/questions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6384,6 +7363,10 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6405,7 +7388,7 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
         questionsControllerFindOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('questionsControllerFindOne', 'id', id)
-            const localVarPath = `/questions/{id}`
+            const localVarPath = `/api/v1/questions/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6417,6 +7400,10 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6438,7 +7425,7 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
         questionsControllerRemove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('questionsControllerRemove', 'id', id)
-            const localVarPath = `/questions/{id}`
+            const localVarPath = `/api/v1/questions/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6450,6 +7437,10 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6474,7 +7465,7 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
             assertParamExists('questionsControllerUpdate', 'id', id)
             // verify required parameter 'updateQuestionDto' is not null or undefined
             assertParamExists('questionsControllerUpdate', 'updateQuestionDto', updateQuestionDto)
-            const localVarPath = `/questions/{id}`
+            const localVarPath = `/api/v1/questions/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6486,6 +7477,10 @@ export const QuestionsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6721,6 +7716,10 @@ export const SubjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -6752,6 +7751,10 @@ export const SubjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6786,6 +7789,10 @@ export const SubjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -6819,6 +7826,10 @@ export const SubjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -6851,6 +7862,10 @@ export const SubjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -6887,6 +7902,10 @@ export const SubjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     

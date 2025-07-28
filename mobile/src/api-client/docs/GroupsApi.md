@@ -4,17 +4,21 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**groupsControllerAddMember**](#groupscontrolleraddmember) | **POST** /api/v1/groups/{gid}/members | |
+|[**groupsControllerAddMember**](#groupscontrolleraddmember) | **POST** /api/v1/groups/{groupId}/members | |
+|[**groupsControllerAddUser**](#groupscontrolleradduser) | **POST** /api/v1/groups/{groupId}/users | |
 |[**groupsControllerCreate**](#groupscontrollercreate) | **POST** /api/v1/groups | |
 |[**groupsControllerFindAll**](#groupscontrollerfindall) | **GET** /api/v1/groups | |
 |[**groupsControllerFindAllGroupsByMembership**](#groupscontrollerfindallgroupsbymembership) | **GET** /api/v1/groups/member | |
 |[**groupsControllerFindAllGroupsByOwner**](#groupscontrollerfindallgroupsbyowner) | **GET** /api/v1/groups/owned | |
 |[**groupsControllerFindOne**](#groupscontrollerfindone) | **GET** /api/v1/groups/{id} | |
-|[**groupsControllerReadMembers**](#groupscontrollerreadmembers) | **GET** /api/v1/groups/{gid}/members | |
+|[**groupsControllerFindUserGroups**](#groupscontrollerfindusergroups) | **GET** /api/v1/groups/user | |
+|[**groupsControllerReadMembers**](#groupscontrollerreadmembers) | **GET** /api/v1/groups/{groupId}/members | |
 |[**groupsControllerRemove**](#groupscontrollerremove) | **DELETE** /api/v1/groups/{id} | |
-|[**groupsControllerRemoveMember**](#groupscontrollerremovemember) | **DELETE** /api/v1/groups/{gid}/members/{mid} | |
+|[**groupsControllerRemoveMember**](#groupscontrollerremovemember) | **DELETE** /api/v1/groups/{groupId}/members/{mid} | |
+|[**groupsControllerRemoveUser**](#groupscontrollerremoveuser) | **DELETE** /api/v1/groups/{groupId}/users/{mid} | |
 |[**groupsControllerUpdate**](#groupscontrollerupdate) | **PATCH** /api/v1/groups/{id} | |
-|[**groupsControllerUpdateMember**](#groupscontrollerupdatemember) | **PATCH** /api/v1/groups/{gid}/members/{mid} | |
+|[**groupsControllerUpdateMember**](#groupscontrollerupdatemember) | **PATCH** /api/v1/groups/{groupId}/members/{mid} | |
+|[**groupsControllerUpdateUser**](#groupscontrollerupdateuser) | **PATCH** /api/v1/groups/{groupId}/users/{mid} | |
 
 # **groupsControllerAddMember**
 > number groupsControllerAddMember(addGroupMemberDto)
@@ -32,11 +36,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new GroupsApi(configuration);
 
-let gid: number; // (default to undefined)
+let groupId: number; // (default to undefined)
 let addGroupMemberDto: AddGroupMemberDto; //
 
 const { status, data } = await apiInstance.groupsControllerAddMember(
-    gid,
+    groupId,
     addGroupMemberDto
 );
 ```
@@ -46,7 +50,61 @@ const { status, data } = await apiInstance.groupsControllerAddMember(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **addGroupMemberDto** | **AddGroupMemberDto**|  | |
-| **gid** | [**number**] |  | defaults to undefined|
+| **groupId** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+**number**
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **groupsControllerAddUser**
+> number groupsControllerAddUser(addGroupUserDto)
+
+
+### Example
+
+```typescript
+import {
+    GroupsApi,
+    Configuration,
+    AddGroupUserDto
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new GroupsApi(configuration);
+
+let groupId: number; // (default to undefined)
+let addGroupUserDto: AddGroupUserDto; //
+
+const { status, data } = await apiInstance.groupsControllerAddUser(
+    groupId,
+    addGroupUserDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **addGroupUserDto** | **AddGroupUserDto**|  | |
+| **groupId** | [**number**] |  | defaults to undefined|
 
 
 ### Return type
@@ -300,8 +358,8 @@ const { status, data } = await apiInstance.groupsControllerFindOne(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **groupsControllerReadMembers**
-> Array<GroupMember> groupsControllerReadMembers()
+# **groupsControllerFindUserGroups**
+> Array<GroupUser> groupsControllerFindUserGroups()
 
 
 ### Example
@@ -315,10 +373,53 @@ import {
 const configuration = new Configuration();
 const apiInstance = new GroupsApi(configuration);
 
-let gid: number; // (default to undefined)
+const { status, data } = await apiInstance.groupsControllerFindUserGroups();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**Array<GroupUser>**
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **groupsControllerReadMembers**
+> Array<GroupMembersResponseItemDto> groupsControllerReadMembers()
+
+
+### Example
+
+```typescript
+import {
+    GroupsApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new GroupsApi(configuration);
+
+let groupId: number; // (default to undefined)
 
 const { status, data } = await apiInstance.groupsControllerReadMembers(
-    gid
+    groupId
 );
 ```
 
@@ -326,12 +427,12 @@ const { status, data } = await apiInstance.groupsControllerReadMembers(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **gid** | [**number**] |  | defaults to undefined|
+| **groupId** | [**number**] |  | defaults to undefined|
 
 
 ### Return type
 
-**Array<GroupMember>**
+**Array<GroupMembersResponseItemDto>**
 
 ### Authorization
 
@@ -416,11 +517,11 @@ const configuration = new Configuration();
 const apiInstance = new GroupsApi(configuration);
 
 let mid: number; // (default to undefined)
-let gid: number; // (default to undefined)
+let groupId: number; // (default to undefined)
 
 const { status, data } = await apiInstance.groupsControllerRemoveMember(
     mid,
-    gid
+    groupId
 );
 ```
 
@@ -429,7 +530,60 @@ const { status, data } = await apiInstance.groupsControllerRemoveMember(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **mid** | [**number**] |  | defaults to undefined|
-| **gid** | [**number**] |  | defaults to undefined|
+| **groupId** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **groupsControllerRemoveUser**
+> groupsControllerRemoveUser()
+
+
+### Example
+
+```typescript
+import {
+    GroupsApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new GroupsApi(configuration);
+
+let mid: number; // (default to undefined)
+let groupId: number; // (default to undefined)
+
+const { status, data } = await apiInstance.groupsControllerRemoveUser(
+    mid,
+    groupId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **mid** | [**number**] |  | defaults to undefined|
+| **groupId** | [**number**] |  | defaults to undefined|
 
 
 ### Return type
@@ -523,12 +677,12 @@ import {
 const configuration = new Configuration();
 const apiInstance = new GroupsApi(configuration);
 
-let gid: number; // (default to undefined)
+let groupId: number; // (default to undefined)
 let mid: number; // (default to undefined)
 let updateGroupMemberDto: UpdateGroupMemberDto; //
 
 const { status, data } = await apiInstance.groupsControllerUpdateMember(
-    gid,
+    groupId,
     mid,
     updateGroupMemberDto
 );
@@ -539,7 +693,64 @@ const { status, data } = await apiInstance.groupsControllerUpdateMember(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **updateGroupMemberDto** | **UpdateGroupMemberDto**|  | |
-| **gid** | [**number**] |  | defaults to undefined|
+| **groupId** | [**number**] |  | defaults to undefined|
+| **mid** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **groupsControllerUpdateUser**
+> groupsControllerUpdateUser(updateGroupUserDto)
+
+
+### Example
+
+```typescript
+import {
+    GroupsApi,
+    Configuration,
+    UpdateGroupUserDto
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new GroupsApi(configuration);
+
+let groupId: number; // (default to undefined)
+let mid: number; // (default to undefined)
+let updateGroupUserDto: UpdateGroupUserDto; //
+
+const { status, data } = await apiInstance.groupsControllerUpdateUser(
+    groupId,
+    mid,
+    updateGroupUserDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateGroupUserDto** | **UpdateGroupUserDto**|  | |
+| **groupId** | [**number**] |  | defaults to undefined|
 | **mid** | [**number**] |  | defaults to undefined|
 
 

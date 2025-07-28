@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **iid** | **number** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **entity** | **string** |  | [default to undefined]
@@ -16,6 +21,11 @@ Name | Type | Description | Notes
 import { Bookmark } from './api';
 
 const instance: Bookmark = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     iid,
     name,
     entity,

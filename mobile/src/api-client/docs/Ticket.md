@@ -5,6 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
+**updatedAt** | **string** |  | [default to undefined]
+**deletedAt** | **string** |  | [default to undefined]
+**_version** | **number** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **list** | [**List**](List.md) |  | [default to undefined]
 **questions** | [**Array&lt;Question&gt;**](Question.md) |  | [default to undefined]
@@ -16,6 +21,11 @@ Name | Type | Description | Notes
 import { Ticket } from './api';
 
 const instance: Ticket = {
+    id,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    _version,
     name,
     list,
     questions,

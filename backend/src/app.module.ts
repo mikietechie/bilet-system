@@ -32,6 +32,7 @@ import { conf } from './conf';
 import { AccountsModule } from './accounts/accounts.module';
 import { GroupMember } from './groups/entities/group-member.entity';
 import { KlassMember } from './klasses/entities/klass-member.entity';
+import { GroupUser } from './groups/entities/group-user.entity';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { KlassMember } from './klasses/entities/klass-member.entity';
         Examination,
         Group,
         GroupMember,
+        GroupUser,
         Klass,
         KlassMember,
         List,

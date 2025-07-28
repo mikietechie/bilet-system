@@ -28,6 +28,15 @@ export class UsersService implements OnApplicationBootstrap {
     }
   }
 
+  async getUserByEmail(email: string): Promise<User> {
+    try {
+      return await this.usersRepository.findOneByOrFail({ email });
+    } catch (error) {
+      console.error(error);
+      throw new NotFoundException(`<User email="${email}" /> was not found!`);
+    }
+  }
+
   async findUserByEmail(email: string): Promise<User | null> {
     return await this.usersRepository.findOneBy({ email });
   }

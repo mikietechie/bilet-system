@@ -17,13 +17,19 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth/jwt-auth.guard';
 import { AddGroupMemberDto } from './dto/add-group-member.dto';
 import { UpdateGroupMemberDto } from './dto/update-group-member.dto';
+import { AddGroupUserDto } from './dto/add-group-user.dto';
+import { UpdateGroupUserDto } from './dto/update-group-user.dto';
+import { GroupUsersService } from './group-users/group-users.service';
 
 @ApiBearerAuth()
 @ApiTags('groups')
 @Controller('api/v1/groups')
 @UseGuards(JwtAuthGuard)
 export class GroupsController {
-  constructor(private readonly groupsService: GroupsService) {}
+  constructor(
+    private readonly groupsService: GroupsService,
+    private readonly groupUsersService: GroupUsersService,
+  ) {}
 
   @Post()
   create(@Body() createGroupDto: CreateGroupDto, @Request() req) {
@@ -33,11 +39,6 @@ export class GroupsController {
   @Get()
   findAll() {
     return this.groupsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.groupsService.findOne(id);
   }
 
   @Patch(':id')
@@ -56,44 +57,82 @@ export class GroupsController {
 
   @Get('owned')
   findAllGroupsByOwner(@Request() req) {
-    return this.groupsService.findAllGroupsByOwner(req.user?.id);
+    return this.groupsService.findAllGroupsByOwner(req.user?.userId);
   }
 
   @Get('member')
   findAllGroupsByMembership(@Request() req) {
-    return this.groupsService.findAllGroupsByOwner(req.user?.id);
+    return this.groupsService.findAllGroupsByOwner(req.user?.userId);
   }
 
-  @Get(':gid/members')
-  readMembers(@Param('gid', ParseIntPipe) id: number) {
+  @Get('user')
+  findUserGroups(@Request() req) {
+    return this.groupUsersService.findByUser(req.user?.userId);
+  }
+
+  @Get(':groupId/members')
+  readMembers(@Param('groupId', ParseIntPipe) id: number) {
     return this.groupsService.findAllMembers(id);
   }
 
-  @Post(':gid/members')
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.groupsService.findOne(id);
+  }
+
+  @Post(':groupId/members')
   addMember(
     @Body() addGroupMemberDto: AddGroupMemberDto,
-    @Param('gid', ParseIntPipe) id: number,
+    @Param('groupId', ParseIntPipe) id: number,
     @Request() req,
   ) {
     return this.groupsService.addMember(id, addGroupMemberDto, req.user);
   }
 
-  @Patch(':gid/members/:mid')
+  @Patch(':groupId/members/:mid')
   updateMember(
     @Body() updateGroupMemberDto: UpdateGroupMemberDto,
-    @Param('gid', ParseIntPipe) gid: number,
+    @Param('groupId', ParseIntPipe) groupId: number,
     @Param('mid', ParseIntPipe) mid: number,
     @Request() req,
   ) {
     return this.groupsService.updateMember(mid, updateGroupMemberDto, req.user);
   }
 
-  @Delete(':gid/members/:mid')
+  @Delete(':groupId/members/:mid')
   removeMember(
     @Param('mid', ParseIntPipe) mid: number,
-    @Param('gid', ParseIntPipe) gid: number,
+    @Param('groupId', ParseIntPipe) groupId: number,
     @Request() req,
   ) {
     return this.groupsService.removeMember(mid, req.user);
+  }
+
+  @Post(':groupId/users')
+  addUser(
+    @Body() addGroupUserDto: AddGroupUserDto,
+    @Param('groupId', ParseIntPipe) id: number,
+    @Request() req,
+  ) {
+    return this.groupUsersService.addUser(id, addGroupUserDto, req.user);
+  }
+
+  @Patch(':groupId/users/:mid')
+  updateUser(
+    @Body() updateGroupUserDto: UpdateGroupUserDto,
+    @Param('groupId', ParseIntPipe) groupId: number,
+    @Param('mid', ParseIntPipe) mid: number,
+    @Request() req,
+  ) {
+    return this.groupUsersService.updateUser(mid, updateGroupUserDto, req.user);
+  }
+
+  @Delete(':groupId/users/:mid')
+  removeUser(
+    @Param('mid', ParseIntPipe) mid: number,
+    @Param('groupId', ParseIntPipe) groupId: number,
+    @Request() req,
+  ) {
+    return this.groupUsersService.removeUser(mid, req.user);
   }
 }

@@ -15,6 +15,7 @@ import { AddGroupMemberDto } from './dto/add-group-member.dto';
 import { GroupMember } from './entities/group-member.entity';
 import { UpdateGroupMemberDto } from './dto/update-group-member.dto';
 import { idAsIBaseAny } from 'src/common/base/utils';
+import { GroupMembersResponseItemDto } from './dto/group-member-item.dto';
 
 @Injectable()
 export class GroupsService {
@@ -75,26 +76,26 @@ export class GroupsService {
   async remove(id: number, token: JwtPayloadDto) {
     const group = await this.findOneWithOwner(id);
     this.canAlterGroup(group, token);
-    await this.groupsRepository.delete(group);
+    await this.groupsRepository.remove(group);
   }
 
-  async findAllMembers(id: number): Promise<GroupMember[]> {
+  async findAllMembers(id: number): Promise<GroupMembersResponseItemDto[]> {
     const group = await this.groupsRepository.findOneBy({ id });
     return await this.groupsRepository.query(
       `
-SELECT
-    group_member."id" as "id",
-    group_member."userId" as "userId",
-    group_member."groupId" as "groupId",
-    group_member."isActive" as "isActive",
-    group_member."isAdmin" as "isAdmin",
-    users."name" as "userName",
-    users."email" as "userEmail"
-FROM
-    group_member
-    JOIN users ON users."id" = group_member."userId"
-WHERE
-    group_member."groupId" = $1;`,
+      SELECT
+          group_member."id" as "id",
+          group_member."userId" as "userId",
+          group_member."groupId" as "groupId",
+          group_member."isActive" as "isActive",
+          group_member."isAdmin" as "isAdmin",
+          users."name" as "userName",
+          users."email" as "userEmail"
+      FROM
+          group_member
+          JOIN users ON users."id" = group_member."userId"
+      WHERE
+          group_member."groupId" = $1;`,
       [group.id],
     );
   }
@@ -105,8 +106,8 @@ WHERE
     token: JwtPayloadDto,
   ): Promise<number> {
     const groupMember = new GroupMember();
-    groupMember.user = await this.usersService.getUserFk(
-      addGroupMemberDto.userId,
+    groupMember.user = await this.usersService.getUserByEmail(
+      addGroupMemberDto.email,
     );
     groupMember.group = await this.findOneWithOwner(groupId);
     groupMember.isAdmin = addGroupMemberDto.isAdmin;
@@ -200,7 +201,8 @@ WHERE
     });
     if (group.owner.id === token.userId || admin) {
       groupMember.isActive = updateGroupMemberDto.isActive;
-      groupMember.isAdmin = updateGroupMemberDto.isAdmin;
+      groupMember.isAdmin =
+        updateGroupMemberDto.isAdmin && groupMember.isActive;
       await this.groupMembersRepository.save(groupMember);
       return;
     }

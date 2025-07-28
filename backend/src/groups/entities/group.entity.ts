@@ -2,6 +2,7 @@ import { User } from 'src/users/entities/user.entity';
 import { BaseEntity } from 'src/common/base/entiry';
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { GroupMember } from './group-member.entity';
+import { GroupUser } from './group-user.entity';
 
 @Entity()
 export class Group extends BaseEntity {
@@ -20,4 +21,7 @@ export class Group extends BaseEntity {
 
   @OneToMany(() => GroupMember, (groupMember) => groupMember.group)
   memberships: GroupMember[];
+
+  @OneToMany(() => GroupUser, (groupUser) => groupUser.group)
+  users: GroupUser[];
 }

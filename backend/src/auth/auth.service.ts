@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -13,6 +14,7 @@ import { LoginDto, LoginResponseDto } from './dto/login-dto';
 import { sendMail } from 'src/common/mail.utils';
 import { ActivateDto } from './dto/activate-dto';
 import { getActivationLink } from 'src/users/users.utils';
+import { JwtPayloadDto } from './dto/jwt-payload-dto';
 
 @Injectable()
 export class AuthService {
@@ -67,9 +69,18 @@ export class AuthService {
       role: user.role,
     };
     return {
-      accessToken: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload, { expiresIn: 86400 }),
       refreshToken: '',
     };
+  }
+
+  async user(token: JwtPayloadDto): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id: token.userId });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    user.password = undefined;
+    return user;
   }
 
   async activate(loginDto: ActivateDto) {

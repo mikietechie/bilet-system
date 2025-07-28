@@ -20,11 +20,8 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
+  useIonAlert,
 } from "@ionic/react";
-import {
-  IonInputCustomEvent,
-  InputInputEventDetail,
-} from "@ionic/core/components";
 import "./Page.css";
 import {
   idCardOutline,
@@ -32,43 +29,66 @@ import {
   logInOutline,
   mailOutline,
 } from "ionicons/icons";
-import { FormEvent, useContext, useState } from "react";
-import { AuthApi, RegisterDto } from "../api-client";
-import { ApiCtx } from "../contexts/api-context";
+import { FormEvent, useContext, useRef, useState } from "react";
+import { AuthApi, LoginDto, RegisterDto } from "../api-client";
+import { ApiCtx, getDefaultConfiguration } from "../contexts/api-context";
 
 const AuthPage: React.FC = () => {
+  const [presentAlert] = useIonAlert();
   const [action, setAction] = useState<"login" | "register">("login");
   const [recoverModalIsOpen, setRecoverModalIsOpen] = useState(false);
-  const [formData, setFormData] = useState<RegisterDto>({
-    email: "",
-    name: "",
-    password: "",
-  });
+  const nameRef = useRef<HTMLIonInputElement>(null);
+  const emailRef = useRef<HTMLIonInputElement>(null);
+  const passwordRef = useRef<HTMLIonInputElement>(null);
   const apiCtx = useContext(ApiCtx);
   const authApi = new AuthApi(apiCtx?.configuration);
 
-  const onChange = (e: IonInputCustomEvent<InputInputEventDetail>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const formData = {
+      email: emailRef.current?.value,
+      name: nameRef.current?.value,
+      password: passwordRef.current?.value,
+    } as RegisterDto;
     try {
-      const res = await authApi.authControllerLogin(formData);
-      const configuration = apiCtx!.configuration;
-      configuration.accessToken = res.data.accessToken;
-      apiCtx?.setConfiguration(configuration);
-      apiCtx?.setUser(true)
+      if (action === "register") {
+        await register(formData);
+      } else {
+        await login(formData);
+      }
     } catch (error) {
-      console.log(error);
+      await presentAlert({ message: `${error}`, header: "Error" });
     }
     return false;
   };
 
   const onSubmitRecoverForm = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    alert("not implemented");
     return false;
+  };
+
+  const login = async (formData: LoginDto) => {
+    const res = await authApi.authControllerLogin(formData);
+    if (res.status >= 400) {
+      throw new Error(res.statusText);
+    }
+    const configuration = getDefaultConfiguration();
+    configuration.accessToken = res.data.accessToken;
+    console.log("configuration set");
+    apiCtx?.setConfiguration(configuration);
+  };
+
+  const register = async (formData: RegisterDto) => {
+    const res = await authApi.authControllerRegister(formData);
+    if (res.status >= 400) {
+      throw new Error(res.statusText);
+    }
+    await presentAlert({
+      header: `Success`,
+      message: `Successfully registered, logging in!`,
+    });
+    await login(formData);
   };
 
   return (
@@ -93,8 +113,7 @@ const AuthPage: React.FC = () => {
                     label="Email"
                     labelPlacement="floating"
                     type="email"
-                    name="name"
-                    onIonInput={onChange}
+                    ref={emailRef}
                   />
                   <IonIcon slot="start" icon={mailOutline} />
                 </IonItem>
@@ -125,8 +144,7 @@ const AuthPage: React.FC = () => {
                             label="Full name"
                             labelPlacement="floating"
                             type="text"
-                            name="name"
-                            onIonInput={onChange}
+                            ref={nameRef}
                           />
                           <IonIcon slot="start" icon={idCardOutline} />
                         </IonItem>
@@ -136,8 +154,7 @@ const AuthPage: React.FC = () => {
                           label="Email"
                           labelPlacement="floating"
                           type="email"
-                          name="email"
-                          onIonInput={onChange}
+                          ref={emailRef}
                         />
                         <IonIcon slot="start" icon={mailOutline} />
                       </IonItem>
@@ -146,8 +163,7 @@ const AuthPage: React.FC = () => {
                           label="Password"
                           labelPlacement="floating"
                           type="password"
-                          name="password"
-                          onIonInput={onChange}
+                          ref={passwordRef}
                         />
                         <IonIcon slot="start" icon={keyOutline} />
                       </IonItem>
