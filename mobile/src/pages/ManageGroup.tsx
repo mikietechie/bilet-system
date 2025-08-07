@@ -40,9 +40,11 @@ import {
 import { ApiCtx } from "../contexts/api-context";
 import {
   AddGroupMemberDto,
+  AddGroupUserDto,
   Group,
   GroupMembersResponseItemDto,
   GroupsApi,
+  GroupUsersResponseItemDto,
   UpdateGroupDto,
   UpdateGroupMemberDto,
 } from "../api-client";
@@ -62,6 +64,7 @@ import {
 } from "ionicons/icons";
 import { AxiosError } from "axios";
 import { fmtAxiosError } from "../utils/error-fmt";
+import GroupUsersList from "../components/GroupUsersList";
 
 const ManageGroup: React.FC = () => {
   // Ionic Hooks
@@ -77,6 +80,7 @@ const ManageGroup: React.FC = () => {
   const [groupMembers, setGroupMembers] = useState<
     GroupMembersResponseItemDto[]
   >([]);
+  const [groupUsers, setGroupUsers] = useState<GroupUsersResponseItemDto[]>([]);
   const [selectedMember, setSelectedMember] =
     useState<GroupMembersResponseItemDto>();
   // Refs
@@ -84,6 +88,8 @@ const ManageGroup: React.FC = () => {
   const updateGroupIsPublicRef = useRef<HTMLIonCheckboxElement>(null);
   const updateGroupMembersNeedActivationRef =
     useRef<HTMLIonCheckboxElement>(null);
+
+  const newUserEmailRef = useRef<HTMLIonInputElement>(null);
 
   const newMemberEmailRef = useRef<HTMLIonInputElement>(null);
   const newMemberIsAdminRef = useRef<HTMLIonCheckboxElement>(null);
@@ -104,6 +110,9 @@ const ManageGroup: React.FC = () => {
     groupsApi
       .groupsControllerReadMembers(_groupId)
       .then((res) => setGroupMembers(res.data));
+    groupsApi
+      .groupsControllerFindUsersByGroup(_groupId)
+      .then((res) => setGroupUsers(res.data));
   }, [groupsApi, groupId]);
 
   useEffect(() => {
@@ -121,6 +130,22 @@ const ManageGroup: React.FC = () => {
       .then(() => {
         // newMemberEmailRef.current?.;
         setAddMemberModalIsOpen(false);
+        loaddata();
+      })
+      .catch((err: AxiosError) =>
+        presentAlert({ header: `Error`, message: fmtAxiosError(err) })
+      );
+    return false;
+  };
+
+  const onSubmitAddNewUserForm = (event: FormEvent) => {
+    event.preventDefault();
+    const data: AddGroupUserDto = {
+      email: (newUserEmailRef.current?.value as string) || "",
+    };
+    groupsApi
+      .groupsControllerAddUser(group!.id, data)
+      .then(() => {
         loaddata();
       })
       .catch((err: AxiosError) =>
@@ -329,6 +354,7 @@ const ManageGroup: React.FC = () => {
               </IonButton>
             </div>
           </form>
+          <GroupUsersList groupId={parseInt(groupId)} />
           <div className="ion-padding ion-margin-top">
             <IonButton
               expand="block"

@@ -20,6 +20,7 @@ export class BookmarksService {
     bookmark.iid = createBookmarkDto.iid;
     bookmark.entity = createBookmarkDto.entity;
     bookmark.name = createBookmarkDto.name;
+    bookmark.key = createBookmarkDto.key;
     bookmark.owner = { id: token.userId } as any;
     await this.bookmarksRepository.save(bookmark);
     return bookmark.id;

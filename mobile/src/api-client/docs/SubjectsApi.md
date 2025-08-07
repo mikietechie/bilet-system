@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**subjectsControllerCreate**](#subjectscontrollercreate) | **POST** /api/v1/subjects | |
 |[**subjectsControllerFindAll**](#subjectscontrollerfindall) | **GET** /api/v1/subjects | |
+|[**subjectsControllerFindListsBySubject**](#subjectscontrollerfindlistsbysubject) | **GET** /api/v1/subjects/{subjectId}/lists | |
 |[**subjectsControllerFindNotes**](#subjectscontrollerfindnotes) | **GET** /api/v1/subjects/{id}/notes | |
 |[**subjectsControllerFindOne**](#subjectscontrollerfindone) | **GET** /api/v1/subjects/{id} | |
 |[**subjectsControllerRemove**](#subjectscontrollerremove) | **DELETE** /api/v1/subjects/{id} | |
@@ -87,6 +88,56 @@ This endpoint does not have any parameters.
 ### Return type
 
 **Array<Subject>**
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **subjectsControllerFindListsBySubject**
+> Array<List> subjectsControllerFindListsBySubject()
+
+
+### Example
+
+```typescript
+import {
+    SubjectsApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new SubjectsApi(configuration);
+
+let subjectId: number; // (default to undefined)
+
+const { status, data } = await apiInstance.subjectsControllerFindListsBySubject(
+    subjectId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **subjectId** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+**Array<List>**
 
 ### Authorization
 

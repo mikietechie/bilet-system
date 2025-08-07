@@ -839,6 +839,49 @@ export interface GroupUser {
 /**
  * 
  * @export
+ * @interface GroupUsersResponseItemDto
+ */
+export interface GroupUsersResponseItemDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupUsersResponseItemDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupUsersResponseItemDto
+     */
+    'userId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupUsersResponseItemDto
+     */
+    'groupId': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupUsersResponseItemDto
+     */
+    'isActive': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUsersResponseItemDto
+     */
+    'userName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUsersResponseItemDto
+     */
+    'userEmail': string;
+}
+/**
+ * 
+ * @export
  * @interface Klass
  */
 export interface Klass {
@@ -4247,6 +4290,43 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        groupsControllerFindUsersByGroup: async (groupId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('groupsControllerFindUsersByGroup', 'groupId', groupId)
+            const localVarPath = `/api/v1/groups/{groupId}/users`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         groupsControllerReadMembers: async (groupId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('groupsControllerReadMembers', 'groupId', groupId)
@@ -4358,19 +4438,19 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {number} mid 
          * @param {number} groupId 
+         * @param {number} mid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerRemoveUser: async (mid: number, groupId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'mid' is not null or undefined
-            assertParamExists('groupsControllerRemoveUser', 'mid', mid)
+        groupsControllerRemoveUser: async (groupId: number, mid: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('groupsControllerRemoveUser', 'groupId', groupId)
+            // verify required parameter 'mid' is not null or undefined
+            assertParamExists('groupsControllerRemoveUser', 'mid', mid)
             const localVarPath = `/api/v1/groups/{groupId}/users/{mid}`
-                .replace(`{${"mid"}}`, encodeURIComponent(String(mid)))
-                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)))
+                .replace(`{${"mid"}}`, encodeURIComponent(String(mid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4644,6 +4724,18 @@ export const GroupsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async groupsControllerFindUsersByGroup(groupId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupUsersResponseItemDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerFindUsersByGroup(groupId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerFindUsersByGroup']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async groupsControllerReadMembers(groupId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupMembersResponseItemDto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerReadMembers(groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
@@ -4677,13 +4769,13 @@ export const GroupsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} mid 
          * @param {number} groupId 
+         * @param {number} mid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async groupsControllerRemoveUser(mid: number, groupId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerRemoveUser(mid, groupId, options);
+        async groupsControllerRemoveUser(groupId: number, mid: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupsControllerRemoveUser(groupId, mid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupsControllerRemoveUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4815,6 +4907,15 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        groupsControllerFindUsersByGroup(groupId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupUsersResponseItemDto>> {
+            return localVarFp.groupsControllerFindUsersByGroup(groupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} groupId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         groupsControllerReadMembers(groupId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupMembersResponseItemDto>> {
             return localVarFp.groupsControllerReadMembers(groupId, options).then((request) => request(axios, basePath));
         },
@@ -4839,13 +4940,13 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @param {number} mid 
          * @param {number} groupId 
+         * @param {number} mid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupsControllerRemoveUser(mid: number, groupId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.groupsControllerRemoveUser(mid, groupId, options).then((request) => request(axios, basePath));
+        groupsControllerRemoveUser(groupId: number, mid: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.groupsControllerRemoveUser(groupId, mid, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4982,6 +5083,17 @@ export class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
+    public groupsControllerFindUsersByGroup(groupId: number, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerFindUsersByGroup(groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} groupId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
     public groupsControllerReadMembers(groupId: number, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).groupsControllerReadMembers(groupId, options).then((request) => request(this.axios, this.basePath));
     }
@@ -5011,14 +5123,14 @@ export class GroupsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} mid 
      * @param {number} groupId 
+     * @param {number} mid 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public groupsControllerRemoveUser(mid: number, groupId: number, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).groupsControllerRemoveUser(mid, groupId, options).then((request) => request(this.axios, this.basePath));
+    public groupsControllerRemoveUser(groupId: number, mid: number, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).groupsControllerRemoveUser(groupId, mid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7769,6 +7881,43 @@ export const SubjectsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @param {number} subjectId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        subjectsControllerFindListsBySubject: async (subjectId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'subjectId' is not null or undefined
+            assertParamExists('subjectsControllerFindListsBySubject', 'subjectId', subjectId)
+            const localVarPath = `/api/v1/subjects/{subjectId}/lists`
+                .replace(`{${"subjectId"}}`, encodeURIComponent(String(subjectId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7956,6 +8105,18 @@ export const SubjectsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} subjectId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subjectsControllerFindListsBySubject(subjectId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<List>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.subjectsControllerFindListsBySubject(subjectId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubjectsApi.subjectsControllerFindListsBySubject']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8032,6 +8193,15 @@ export const SubjectsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @param {number} subjectId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        subjectsControllerFindListsBySubject(subjectId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<List>> {
+            return localVarFp.subjectsControllerFindListsBySubject(subjectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8096,6 +8266,17 @@ export class SubjectsApi extends BaseAPI {
      */
     public subjectsControllerFindAll(options?: RawAxiosRequestConfig) {
         return SubjectsApiFp(this.configuration).subjectsControllerFindAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} subjectId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubjectsApi
+     */
+    public subjectsControllerFindListsBySubject(subjectId: number, options?: RawAxiosRequestConfig) {
+        return SubjectsApiFp(this.configuration).subjectsControllerFindListsBySubject(subjectId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

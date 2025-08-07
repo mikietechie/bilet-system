@@ -31,6 +31,7 @@ export class ListsService {
     const list = new List();
     list.name = createListDto.name;
     list.owner = await this.usersService.getUserFk(token.userId);
+    list.subject = idAsIBaseAny(createListDto.subjectId);
     await this.listsRepository.save(list);
     return list.id;
   }
@@ -43,8 +44,15 @@ export class ListsService {
     return await this.listsRepository.findBy({ owner: idAsIBaseAny(userId) });
   }
 
-  async findOne(id: number): Promise<List> {
-    const list = await this.listsRepository.findOneBy({ id });
+  async findOne(projectId: number): Promise<List> {
+    const list = await this.listsRepository.findOne({
+      where: {
+        id: projectId,
+      },
+      relations: {
+        subject: true,
+      },
+    });
     if (!list) {
       throw new NotFoundException();
     }

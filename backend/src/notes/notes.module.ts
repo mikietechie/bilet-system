@@ -7,9 +7,10 @@ import { User } from 'src/users/entities/user.entity';
 import { Subject } from 'src/subjects/entities/subject.entity';
 import { UsersService } from 'src/users/users.service';
 import { SubjectsService } from 'src/subjects/subjects.service';
+import { List } from 'src/lists/entities/list.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Note, Subject, User])],
+  imports: [TypeOrmModule.forFeature([Note, Subject, User, List])],
   controllers: [NotesController],
   providers: [NotesService, UsersService, SubjectsService],
 })

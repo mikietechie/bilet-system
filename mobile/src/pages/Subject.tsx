@@ -5,6 +5,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonListHeader,
   IonMenuButton,
   IonPage,
   IonRefresher,
@@ -16,13 +17,14 @@ import {
 import "./Page.css";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { ApiCtx } from "../contexts/api-context";
-import { Subject, SubjectsApi } from "../api-client";
+import { List, Subject, SubjectsApi } from "../api-client";
 import { IonRefresherCustomEvent } from "@ionic/core";
 import { useParams } from "react-router";
 
 const SubjectPage: React.FC = () => {
   const { subjectId } = useParams<{ subjectId: string }>();
   const [subject, setSubject] = useState<Subject>();
+  const [lists, setLists] = useState<List[]>([]);
   const apiCtx = useContext(ApiCtx);
   const subjectsApi = useMemo(
     () => new SubjectsApi(apiCtx?.configuration),
@@ -33,6 +35,9 @@ const SubjectPage: React.FC = () => {
     subjectsApi
       .subjectsControllerFindOne(parseInt(subjectId))
       .then((res) => setSubject(res.data));
+    subjectsApi
+      .subjectsControllerFindListsBySubject(parseInt(subjectId))
+      .then((res) => setLists(res.data));
   }, [subjectsApi, subjectId]);
 
   useEffect(() => {
@@ -56,7 +61,9 @@ const SubjectPage: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{subject?.name}</IonTitle>
+          <IonTitle>
+            {subject?.name} - {subject?.level}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -65,14 +72,12 @@ const SubjectPage: React.FC = () => {
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
         <IonList>
-          <IonItem>
-            <IonLabel>
-              <h2>Details</h2>
-              <p>
-                {subject?.name} {subject?.level}
-              </p>
-            </IonLabel>
-          </IonItem>
+          <IonListHeader>Lists</IonListHeader>
+          {lists.map((list, index) => (
+            <IonItem key={index}>
+              <IonLabel>{list.name}</IonLabel>
+            </IonItem>
+          ))}
         </IonList>
       </IonContent>
     </IonPage>

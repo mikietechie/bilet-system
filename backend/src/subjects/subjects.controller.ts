@@ -42,6 +42,11 @@ export class SubjectsController {
     return this.subjectsService.findNotes(id);
   }
 
+  @Get(':subjectId/lists')
+  findListsBySubject(@Param('subjectId', ParseIntPipe) subjectId: number) {
+    return this.subjectsService.findListsBySubject(subjectId);
+  }
+
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,

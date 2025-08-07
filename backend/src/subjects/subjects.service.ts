@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Note } from 'src/notes/entities/note.entity';
 import { idAsIBaseAny } from 'src/common/base/utils';
+import { List } from 'src/lists/entities/list.entity';
 
 @Injectable()
 export class SubjectsService {
@@ -14,6 +15,8 @@ export class SubjectsService {
     private subjectsRepository: Repository<Subject>,
     @InjectRepository(Note)
     private notesRepository: Repository<Note>,
+    @InjectRepository(List)
+    private listsRepository: Repository<List>,
   ) {}
 
   async create(createSubjectDto: CreateSubjectDto): Promise<number> {
@@ -31,6 +34,13 @@ export class SubjectsService {
   async findNotes(id: number): Promise<Note[]> {
     return await this.notesRepository.find({
       where: { subject: idAsIBaseAny(id), isPublic: true },
+    });
+  }
+
+  async findListsBySubject(subjectId: number): Promise<List[]> {
+    console.log(idAsIBaseAny(subjectId));
+    return await this.listsRepository.find({
+      where: { subject: idAsIBaseAny(subjectId) },
     });
   }
 

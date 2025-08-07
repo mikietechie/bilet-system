@@ -75,6 +75,11 @@ export class GroupsController {
     return this.groupsService.findAllMembers(id);
   }
 
+  @Get(':groupId/users')
+  findUsersByGroup(@Param('groupId', ParseIntPipe) id: number) {
+    return this.groupUsersService.findByGroup(id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.groupsService.findOne(id);
@@ -129,8 +134,8 @@ export class GroupsController {
 
   @Delete(':groupId/users/:mid')
   removeUser(
-    @Param('mid', ParseIntPipe) mid: number,
     @Param('groupId', ParseIntPipe) groupId: number,
+    @Param('mid', ParseIntPipe) mid: number,
     @Request() req,
   ) {
     return this.groupUsersService.removeUser(mid, req.user);

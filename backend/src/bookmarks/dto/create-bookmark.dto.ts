@@ -5,6 +5,9 @@ export class CreateBookmarkDto {
   iid: number;
 
   @ApiProperty()
+  key: string;
+
+  @ApiProperty()
   name: string;
 
   @ApiProperty()
