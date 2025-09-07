@@ -49,6 +49,8 @@ import ManageGroup from "./pages/ManageGroup";
 import ManageGroups from "./pages/ManageGroups";
 import ManageLists from "./pages/ManageLists";
 import ManageList from "./pages/ManageList";
+import ListPage from "./pages/List";
+import HomePage from "./pages/Home";
 
 setupIonicReact();
 
@@ -89,7 +91,10 @@ const App: React.FC = () => {
               <Menu />
               <IonRouterOutlet id="main">
                 <Route path="/" exact={true}>
-                  <Redirect to="/folder/Inbox" />
+                  <Redirect to="/home" />
+                </Route>
+                <Route path="/home" exact={true}>
+                  <HomePage />
                 </Route>
                 <Route path="/folder/:name" exact={true}>
                   <Page />
@@ -99,6 +104,9 @@ const App: React.FC = () => {
                 </Route>
                 <Route path="/subject/:subjectId" exact={true}>
                   <SubjectPage />
+                </Route>
+                <Route path="/list/:listId" exact={true}>
+                  <ListPage />
                 </Route>
                 <Route path="/manage-groups" exact={true}>
                   <ManageGroups />

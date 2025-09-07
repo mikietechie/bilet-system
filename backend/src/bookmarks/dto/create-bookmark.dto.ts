@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateBookmarkDto {
   @ApiProperty()
-  iid: number;
+  eid: number;
 
   @ApiProperty()
   key: string;

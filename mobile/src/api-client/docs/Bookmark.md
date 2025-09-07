@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **updatedAt** | **string** |  | [default to undefined]
 **deletedAt** | **string** |  | [default to undefined]
 **_version** | **number** |  | [default to undefined]
-**iid** | **number** |  | [default to undefined]
+**eid** | **number** |  | [default to undefined]
+**key** | **string** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **entity** | **string** |  | [default to undefined]
 **owner** | [**User**](User.md) |  | [default to undefined]
@@ -26,7 +27,8 @@ const instance: Bookmark = {
     updatedAt,
     deletedAt,
     _version,
-    iid,
+    eid,
+    key,
     name,
     entity,
     owner,

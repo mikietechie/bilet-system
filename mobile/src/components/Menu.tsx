@@ -15,6 +15,8 @@ import {
   bookmarkOutline,
   bookOutline,
   bookSharp,
+  homeOutline,
+  homeSharp,
   listOutline,
   listSharp,
   logOutOutline,
@@ -34,6 +36,12 @@ interface AppPage {
 }
 
 const appPages: AppPage[] = [
+  {
+    title: "Home",
+    url: "/home",
+    iosIcon: homeOutline,
+    mdIcon: homeSharp,
+  },
   {
     title: "Subjects",
     url: "/subjects",

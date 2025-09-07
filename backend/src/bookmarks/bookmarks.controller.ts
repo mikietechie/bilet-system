@@ -31,9 +31,13 @@ export class BookmarksController {
     return this.bookmarksService.findAll(req.user);
   }
 
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number, @Request() req) {
-    return this.bookmarksService.findOne(id, req.user);
+  @Get(':entity/:id')
+  findOne(
+    @Param('entity') entity: string,
+    @Param('id', ParseIntPipe) id: number,
+    @Request() req,
+  ) {
+    return this.bookmarksService.findOne(entity, id, req.user);
   }
 
   // @Patch(':id')
@@ -46,7 +50,11 @@ export class BookmarksController {
   // }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number, @Request() req) {
-    return this.bookmarksService.remove(id, req.user);
+  remove(
+    @Param('entity') entity: string,
+    @Param('id', ParseIntPipe) id: number,
+    @Request() req,
+  ) {
+    return this.bookmarksService.remove(entity, id, req.user);
   }
 }

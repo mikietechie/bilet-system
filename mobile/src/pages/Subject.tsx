@@ -74,7 +74,7 @@ const SubjectPage: React.FC = () => {
         <IonList>
           <IonListHeader>Lists</IonListHeader>
           {lists.map((list, index) => (
-            <IonItem key={index}>
+            <IonItem key={index} routerLink={`/list/${list.id}`}>
               <IonLabel>{list.name}</IonLabel>
             </IonItem>
           ))}

@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**iid** | **number** |  | [default to undefined]
+**eid** | **number** |  | [default to undefined]
+**key** | **string** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **entity** | **string** |  | [default to undefined]
 
@@ -15,7 +16,8 @@ Name | Type | Description | Notes
 import { CreateBookmarkDto } from './api';
 
 const instance: CreateBookmarkDto = {
-    iid,
+    eid,
+    key,
     name,
     entity,
 };

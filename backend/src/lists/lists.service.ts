@@ -79,7 +79,10 @@ export class ListsService {
 
   async findAllQuestions(listId: number): Promise<Question[]> {
     const list = await this.getListWithOwner(listId);
-    return await this.questionsRepository.findBy({ list: { id: list.id } });
+    return await this.questionsRepository.find({
+      where: { list: { id: list.id } },
+      order: { title: 'asc' },
+    });
   }
 
   async checkAlterPermissions(list: List, token: JwtPayloadDto) {

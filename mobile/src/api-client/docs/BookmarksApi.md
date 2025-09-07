@@ -6,7 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**bookmarksControllerCreate**](#bookmarkscontrollercreate) | **POST** /api/v1/bookmarks | |
 |[**bookmarksControllerFindAll**](#bookmarkscontrollerfindall) | **GET** /api/v1/bookmarks | |
-|[**bookmarksControllerFindOne**](#bookmarkscontrollerfindone) | **GET** /api/v1/bookmarks/{id} | |
+|[**bookmarksControllerFindOne**](#bookmarkscontrollerfindone) | **GET** /api/v1/bookmarks/{entity}/{id} | |
 |[**bookmarksControllerRemove**](#bookmarkscontrollerremove) | **DELETE** /api/v1/bookmarks/{id} | |
 
 # **bookmarksControllerCreate**
@@ -118,9 +118,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new BookmarksApi(configuration);
 
+let entity: string; // (default to undefined)
 let id: number; // (default to undefined)
 
 const { status, data } = await apiInstance.bookmarksControllerFindOne(
+    entity,
     id
 );
 ```
@@ -129,6 +131,7 @@ const { status, data } = await apiInstance.bookmarksControllerFindOne(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **entity** | [**string**] |  | defaults to undefined|
 | **id** | [**number**] |  | defaults to undefined|
 
 
@@ -168,9 +171,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new BookmarksApi(configuration);
 
+let entity: string; // (default to undefined)
 let id: number; // (default to undefined)
 
 const { status, data } = await apiInstance.bookmarksControllerRemove(
+    entity,
     id
 );
 ```
@@ -179,6 +184,7 @@ const { status, data } = await apiInstance.bookmarksControllerRemove(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **entity** | [**string**] |  | defaults to undefined|
 | **id** | [**number**] |  | defaults to undefined|
 
 

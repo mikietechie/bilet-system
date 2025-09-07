@@ -3,10 +3,10 @@ import { BaseEntity } from 'src/common/base/entiry';
 import { Entity, Column, ManyToOne, JoinColumn, Index } from 'typeorm';
 
 @Entity()
-@Index(['iid', 'entity'])
+@Index(['eid', 'entity'])
 export class Bookmark extends BaseEntity {
   @Column({})
-  iid: number;
+  eid: number;
 
   @Column({ length: 128, nullable: true })
   key: string;

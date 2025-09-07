@@ -17,7 +17,7 @@ export class BookmarksService {
     token: JwtPayloadDto,
   ): Promise<number> {
     const bookmark = new Bookmark();
-    bookmark.iid = createBookmarkDto.iid;
+    bookmark.eid = createBookmarkDto.eid;
     bookmark.entity = createBookmarkDto.entity;
     bookmark.name = createBookmarkDto.name;
     bookmark.key = createBookmarkDto.key;
@@ -32,8 +32,12 @@ export class BookmarksService {
     });
   }
 
-  async findOne(id: number, token: JwtPayloadDto): Promise<Bookmark> {
-    const bookmark = await this.findBookmark(id, token.userId);
+  async findOne(
+    entity: string,
+    eid: number,
+    token: JwtPayloadDto,
+  ): Promise<Bookmark> {
+    const bookmark = await this.findBookmark(entity, eid, token.userId);
     return bookmark;
   }
 
@@ -41,14 +45,18 @@ export class BookmarksService {
   //   return `This action updates a #${id} bookmark`;
   // }
 
-  async remove(id: number, token: JwtPayloadDto) {
-    const bookmark = await this.findBookmark(id, token.userId);
+  async remove(entity: string, eid: number, token: JwtPayloadDto) {
+    const bookmark = await this.findBookmark(entity, eid, token.userId);
     await this.bookmarksRepository.remove(bookmark);
   }
 
-  async findBookmark(id: number, userId: number): Promise<Bookmark> {
+  async findBookmark(
+    entity: string,
+    eid: number,
+    userId: number,
+  ): Promise<Bookmark> {
     const bookmark = await this.bookmarksRepository.findOne({
-      where: { id, owner: { id: userId } as any },
+      where: { eid, owner: { id: userId } as any },
     });
     if (!bookmark) {
       throw new NotFoundException();

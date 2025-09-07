@@ -176,7 +176,13 @@ export interface Bookmark {
      * @type {number}
      * @memberof Bookmark
      */
-    'iid': number;
+    'eid': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Bookmark
+     */
+    'key': string;
     /**
      * 
      * @type {string}
@@ -238,7 +244,13 @@ export interface CreateBookmarkDto {
      * @type {number}
      * @memberof CreateBookmarkDto
      */
-    'iid': number;
+    'eid': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookmarkDto
+     */
+    'key': string;
     /**
      * 
      * @type {string}
@@ -3235,14 +3247,18 @@ export const BookmarksApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {string} entity 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bookmarksControllerFindOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bookmarksControllerFindOne: async (entity: string, id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'entity' is not null or undefined
+            assertParamExists('bookmarksControllerFindOne', 'entity', entity)
             // verify required parameter 'id' is not null or undefined
             assertParamExists('bookmarksControllerFindOne', 'id', id)
-            const localVarPath = `/api/v1/bookmarks/{id}`
+            const localVarPath = `/api/v1/bookmarks/{entity}/{id}`
+                .replace(`{${"entity"}}`, encodeURIComponent(String(entity)))
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3272,14 +3288,18 @@ export const BookmarksApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {string} entity 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bookmarksControllerRemove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bookmarksControllerRemove: async (entity: string, id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'entity' is not null or undefined
+            assertParamExists('bookmarksControllerRemove', 'entity', entity)
             // verify required parameter 'id' is not null or undefined
             assertParamExists('bookmarksControllerRemove', 'id', id)
             const localVarPath = `/api/v1/bookmarks/{id}`
+                .replace(`{${"entity"}}`, encodeURIComponent(String(entity)))
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3342,24 +3362,26 @@ export const BookmarksApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} entity 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bookmarksControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Bookmark>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bookmarksControllerFindOne(id, options);
+        async bookmarksControllerFindOne(entity: string, id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Bookmark>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bookmarksControllerFindOne(entity, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BookmarksApi.bookmarksControllerFindOne']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
+         * @param {string} entity 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bookmarksControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bookmarksControllerRemove(id, options);
+        async bookmarksControllerRemove(entity: string, id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bookmarksControllerRemove(entity, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BookmarksApi.bookmarksControllerRemove']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3393,21 +3415,23 @@ export const BookmarksApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @param {string} entity 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bookmarksControllerFindOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Bookmark> {
-            return localVarFp.bookmarksControllerFindOne(id, options).then((request) => request(axios, basePath));
+        bookmarksControllerFindOne(entity: string, id: number, options?: RawAxiosRequestConfig): AxiosPromise<Bookmark> {
+            return localVarFp.bookmarksControllerFindOne(entity, id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
+         * @param {string} entity 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bookmarksControllerRemove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.bookmarksControllerRemove(id, options).then((request) => request(axios, basePath));
+        bookmarksControllerRemove(entity: string, id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.bookmarksControllerRemove(entity, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3442,24 +3466,26 @@ export class BookmarksApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} entity 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BookmarksApi
      */
-    public bookmarksControllerFindOne(id: number, options?: RawAxiosRequestConfig) {
-        return BookmarksApiFp(this.configuration).bookmarksControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    public bookmarksControllerFindOne(entity: string, id: number, options?: RawAxiosRequestConfig) {
+        return BookmarksApiFp(this.configuration).bookmarksControllerFindOne(entity, id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
+     * @param {string} entity 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BookmarksApi
      */
-    public bookmarksControllerRemove(id: number, options?: RawAxiosRequestConfig) {
-        return BookmarksApiFp(this.configuration).bookmarksControllerRemove(id, options).then((request) => request(this.axios, this.basePath));
+    public bookmarksControllerRemove(entity: string, id: number, options?: RawAxiosRequestConfig) {
+        return BookmarksApiFp(this.configuration).bookmarksControllerRemove(entity, id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -8742,10 +8768,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -8777,10 +8799,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -8815,10 +8833,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -8851,10 +8865,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -8891,10 +8901,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
