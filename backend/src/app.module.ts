@@ -33,6 +33,7 @@ import { AccountsModule } from './accounts/accounts.module';
 import { GroupMember } from './groups/entities/group-member.entity';
 import { KlassMember } from './klasses/entities/klass-member.entity';
 import { GroupUser } from './groups/entities/group-user.entity';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -83,6 +84,7 @@ import { GroupUser } from './groups/entities/group-user.entity';
     MarksModule,
     BookmarksModule,
     AccountsModule,
+    ProfilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
